@@ -7,7 +7,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -144,15 +143,15 @@
     @media (max-width: 600px) { #oracle.expanded .oracle-intuition { letter-spacing: 0.22em; } }
 
     .oracle-question {
-      font-weight: 300; font-size: clamp(1.6rem, 4vw, 2.8rem);
-      color: var(--cream); letter-spacing: 0.04em; margin-bottom: 1rem;
+      font-weight: 300; font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      color: var(--cream); letter-spacing: 0.03em; margin-bottom: 1.4rem;
       opacity: 0; transform: translateY(18px);
       transition: opacity 1s ease 0.2s, transform 1s ease 0.2s;
     }
     #oracle.visible .oracle-question { opacity: 1; transform: translateY(0); }
     .oracle-sub {
-      font-style: italic; font-weight: 300; font-size: clamp(0.88rem, 1.8vw, 1.1rem);
-      color: rgba(245,237,224,0.45); letter-spacing: 0.06em; margin-bottom: 4.5rem;
+      font-style: italic; font-weight: 300; font-size: clamp(1rem, 2.2vw, 1.35rem);
+      color: rgba(245,237,224,0.6); letter-spacing: 0.06em; margin-bottom: 4.5rem;
       opacity: 0; transform: translateY(14px);
       transition: opacity 1s ease 0.38s, transform 1s ease 0.38s;
     }
@@ -196,21 +195,33 @@
       letter-spacing: 0.5em; color: rgba(42,32,24,0.38);
       text-transform: uppercase; margin-bottom: 3rem;
     }
-    .carousel-track { position: relative; width: 100%; min-height: 360px; }
+    .carousel-track {
+      position: relative; overflow: hidden; width: 100%;
+      min-height: clamp(440px, 85vw, 620px);
+      display: flex; align-items: center; justify-content: center;
+    }
 
     .carousel-card {
-      display: none; flex-direction: column; align-items: center; padding: 0 5vw;
+      position: absolute;
+      display: flex; flex-direction: column; align-items: center;
+      width: min(54vw, 340px);
+      transform: translateX(300%) scale(0.75);
+      opacity: 0; pointer-events: none;
+      transition: transform 0.85s cubic-bezier(0.25,1,0.5,1), opacity 0.7s ease;
+      will-change: transform, opacity;
     }
-    .carousel-card.show {
-      display: flex;
-      animation: cardSlideIn 0.65s cubic-bezier(0.16,1,0.3,1) forwards;
-    }
-    .carousel-card.slide-left { animation: cardSlideLeft 0.5s ease forwards; }
-    @keyframes cardSlideIn { from { opacity:0; transform:translateX(40px); } to { opacity:1; transform:translateX(0); } }
-    @keyframes cardSlideLeft { from { opacity:1; transform:translateX(0); } to { opacity:0; transform:translateX(-40px); } }
 
-    .carousel-img-wrap { width: min(72vw, 440px); aspect-ratio: 4/5; overflow: hidden; }
-    .carousel-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .carousel-img-wrap { width: 100%; aspect-ratio: 4/5; overflow: hidden; }
+    .carousel-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transform: scale(1.06);
+      transition: transform 0.85s cubic-bezier(0.25,1,0.5,1);
+    }
+    .carousel-card[data-active] .carousel-img-wrap img { transform: scale(1); }
+
+    /* Meta only fully visible on center card */
+    .carousel-card .carousel-meta { opacity: 0; transition: opacity 0.45s ease; }
+    .carousel-card[data-active] .carousel-meta { opacity: 1; transition: opacity 0.45s ease 0.3s; }
     .carousel-meta { margin-top: 1.3rem; text-align: center; }
     .carousel-titulo { font-weight: 300; font-size: clamp(1.1rem, 3vw, 1.6rem); letter-spacing: 0.06em; color: var(--ink); }
     .carousel-subtitulo { font-style: italic; font-size: 0.78rem; letter-spacing: 0.16em; color: var(--rose); margin-top: 0.3rem; opacity: 0.8; }
@@ -227,10 +238,19 @@
       transition: border-color 0.3s, background 0.3s, transform 0.35s cubic-bezier(0.16,1,0.3,1);
     }
     .carousel-arrow:hover { border-color: var(--ink); background: rgba(42,32,24,0.05); transform: scale(1.12); }
-    .carousel-counter { font-style: italic; font-size: 0.85rem; letter-spacing: 0.28em; color: rgba(42,32,24,0.38); }
+    .carousel-counter {
+      font-style: italic; font-size: 0.85rem; letter-spacing: 0.28em;
+      color: rgba(42,32,24,0.38);
+      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16,1,0.3,1);
+    }
 
-    /* View All */
-    .view-all-wrap { text-align: center; padding: 3.5rem 0 2rem; }
+    /* View All — visible only on last card */
+    .view-all-wrap {
+      text-align: center; padding: 3.5rem 0 2rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.6s ease 0.2s;
+    }
+    .view-all-wrap.last-card-visible { opacity: 1; pointer-events: auto; }
     .view-all-btn {
       background: none; border: none; font-family: 'Cormorant Garamond', serif;
       font-size: clamp(0.8rem, 1.4vw, 0.95rem); letter-spacing: 0.38em; color: var(--ink);
@@ -246,20 +266,46 @@
     .view-all-btn:hover::after { width: 100%; }
 
     /* ═══ FULL GALLERY GRID ═══ */
-    #full-gallery { display: none; padding: 3rem 5vw 6rem; border-top: 1px solid rgba(42,32,24,0.07); }
+    #full-gallery {
+      display: none; padding: 3rem 5vw 6rem;
+      border-top: 1px solid rgba(42,32,24,0.07);
+    }
     #full-gallery.open { display: block; }
     .full-gallery-title {
       text-align: center; font-weight: 300; font-size: 0.75rem; letter-spacing: 0.45em;
       color: rgba(42,32,24,0.38); text-transform: uppercase; margin-bottom: 3rem;
+      opacity: 0; animation: none;
     }
-    .full-gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.2rem; }
-    .fg-item { overflow: hidden; }
+    #full-gallery.open .full-gallery-title {
+      animation: fgFadeUp 0.5s ease forwards;
+    }
+    .full-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .fg-item {
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: none;
+    }
+    #full-gallery.open .fg-item {
+      animation: fgItemIn 0.55s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    @keyframes fgFadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fgItemIn {
+      from { opacity: 0; transform: translateY(16px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0)   scale(1); }
+    }
     .fg-item img {
       width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block;
-      filter: grayscale(12%); transform: scale(1);
-      transition: filter 0.6s ease, transform 0.6s ease;
+      filter: grayscale(10%);
+      transition: filter 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1);
     }
-    .fg-item img:hover { filter: grayscale(0%); transform: scale(1.03); }
+    .fg-item:hover img { filter: grayscale(0%); transform: scale(1.04); }
 
     /* ═══ BRIDGE ═══ */
     #ws-bridge {
@@ -311,8 +357,8 @@
     /* 2 — Inner text block */
     .ws-inner { max-width: 760px; margin: 0 auto; padding: 7rem 6vw 0; }
 
-    /* Title lines (GSAP handles animation) */
-    .ws-heading { margin-bottom: 3rem; overflow: hidden; }
+    /* Title lines */
+    .ws-heading { margin-bottom: 3rem; }
     .ws-heading-line {
       display: block; overflow: hidden; line-height: 1.05;
     }
@@ -320,7 +366,10 @@
       display: block; font-weight: 300;
       font-size: clamp(2.4rem, 6.5vw, 5rem); letter-spacing: 0.04em;
       color: var(--ink); transform: translateY(110%);
+      transition: transform 1.15s cubic-bezier(0.16, 1, 0.3, 1);
     }
+    .ws-heading-line:nth-child(2) span { transition-delay: 0.18s; }
+    #workshops.ws-text-in .ws-heading-line span { transform: translateY(0); }
 
     /* Subhead */
     .ws-subhead {
@@ -363,18 +412,13 @@
       gap: 6px;
       margin-bottom: 0;
     }
-    .ws-pic { overflow: hidden; position: relative; }
-    .ws-pic img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-      will-change: transform;
+    .ws-pic {
+      overflow: hidden; position: relative;
     }
-    /* clip-path reveal — default hidden from bottom */
-    .ws-pic { clip-path: inset(100% 0 0 0); transition: clip-path 1.15s cubic-bezier(0.16,1,0.3,1); }
-    .ws-pic.ws-from-left  { clip-path: inset(0 100% 0 0); }
-    .ws-pic.ws-from-right { clip-path: inset(0 0 0 100%); }
-    .ws-pic.ws-from-top   { clip-path: inset(0 0 100% 0); }
-    .ws-pic.ws-from-bottom{ clip-path: inset(100% 0 0 0); }
-    .ws-pic.ws-revealed   { clip-path: inset(0 0 0 0); }
+    .ws-pic img {
+      width: 100%; height: 112%; object-fit: cover; display: block;
+      margin-top: -6%;
+    }
 
     /* Grid positions */
     .ws-pic-a { grid-column: 1/-1; height: clamp(320px,48vw,620px); transition-delay: 0s; }
@@ -704,23 +748,23 @@
 
   <!-- 4. Editorial photo mosaic with notes -->
   <div class="ws-editorial">
-    <div class="ws-pic ws-pic-a ws-from-bottom">
+    <div class="ws-pic ws-pic-a">
       <img src="images/workshops/ws-3.jpg" alt="Workshop community" loading="lazy">
       <span class="ws-note">No one knew each other at the beginning.</span>
     </div>
-    <div class="ws-pic ws-pic-b ws-from-left">
-      <img src="images/workshops/ws-1.jpg" alt="Creating together" loading="lazy">
+    <div class="ws-pic ws-pic-b">
+      <img src="images/workshops/ws-6.jpg" alt="Creating together" loading="lazy">
       <span class="ws-note">Two hours later, everyone was smiling.</span>
     </div>
-    <div class="ws-pic ws-pic-c ws-from-top">
+    <div class="ws-pic ws-pic-c">
       <img src="images/workshops/ws-2.jpg" alt="In the flow" loading="lazy">
       <span class="ws-note">No experience. Just curiosity.</span>
     </div>
-    <div class="ws-pic ws-pic-d ws-from-right">
+    <div class="ws-pic ws-pic-d">
       <img src="images/workshops/ws-4.jpg" alt="Painting detail" loading="lazy">
       <span class="ws-note">Every stroke tells something you didn't plan.</span>
     </div>
-    <div class="ws-pic ws-pic-e ws-from-bottom">
+    <div class="ws-pic ws-pic-e">
       <img src="images/workshops/ws-5.jpg" alt="Color and life" loading="lazy">
       <span class="ws-note">The mess is part of it.</span>
     </div>
@@ -880,6 +924,10 @@ const intuitionEl  = document.querySelector('.oracle-intuition');
 onVisible(oracleEl, el => {
   el.classList.add('visible');
   setTimeout(() => el.classList.add('expanded'), 900);
+  // Preload full gallery images in background
+  document.querySelectorAll('#full-gallery .fg-item img').forEach(img => {
+    const pre = new Image(); pre.src = img.src;
+  });
 }, 0.25);
 
 if (intuitionEl) {
@@ -897,13 +945,82 @@ const fullGallery       = document.getElementById('full-gallery');
 
 let activeCards = [], currentIdx = 0;
 
+function updateViewAllBtn() {
+  const wrap = document.querySelector('.view-all-wrap');
+  if (!wrap) return;
+  wrap.classList.toggle('last-card-visible', activeCards.length > 0 && currentIdx === activeCards.length - 1);
+}
+
+function animateCounter(current, total) {
+  if (!carouselCounter) return;
+  carouselCounter.style.transition = 'none';
+  carouselCounter.style.opacity = '0';
+  carouselCounter.style.transform = 'translateY(6px)';
+  requestAnimationFrame(() => {
+    carouselCounter.textContent = `${current} / ${total}`;
+    carouselCounter.style.transition = 'opacity 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1)';
+    carouselCounter.style.opacity = '1';
+    carouselCounter.style.transform = 'translateY(0)';
+  });
+}
+
+function positionCards(instant) {
+  // Hide all cards not in activeCards
+  document.querySelectorAll('.carousel-card').forEach(c => {
+    if (!activeCards.includes(c)) {
+      c.style.transition = 'none';
+      c.style.opacity = '0';
+      c.style.transform = 'translateX(300%) scale(0.75)';
+      c.style.pointerEvents = 'none';
+      c.style.zIndex = '0';
+      c.removeAttribute('data-active');
+    }
+  });
+
+  activeCards.forEach((card, i) => {
+    const off = i - currentIdx;
+    const abs = Math.abs(off);
+    const sign = off >= 0 ? 1 : -1;
+    card.style.transition = instant ? 'none' : 'transform 0.85s cubic-bezier(0.25,1,0.5,1), opacity 0.7s ease';
+
+    if (abs === 0) {
+      card.style.opacity = '1';
+      card.style.transform = 'translateX(0) scale(1)';
+      card.style.zIndex = '10';
+      card.style.pointerEvents = 'auto';
+      card.setAttribute('data-active', '');
+    } else if (abs === 1) {
+      card.style.opacity = '0.48';
+      card.style.transform = `translateX(${sign * 82}%) scale(0.85)`;
+      card.style.zIndex = '6';
+      card.style.pointerEvents = 'none';
+      card.removeAttribute('data-active');
+    } else if (abs === 2) {
+      card.style.opacity = '0.2';
+      card.style.transform = `translateX(${sign * 155}%) scale(0.73)`;
+      card.style.zIndex = '3';
+      card.style.pointerEvents = 'none';
+      card.removeAttribute('data-active');
+    } else {
+      card.style.opacity = '0';
+      card.style.transform = `translateX(${sign * 300}%) scale(0.65)`;
+      card.style.zIndex = '0';
+      card.style.pointerEvents = 'none';
+      card.removeAttribute('data-active');
+    }
+  });
+
+  if (instant) {
+    requestAnimationFrame(() => activeCards.forEach(c => { c.style.transition = ''; }));
+  }
+}
+
 function showCard(idx) {
   if (!activeCards.length) return;
-  const newIdx = ((idx % activeCards.length) + activeCards.length) % activeCards.length;
-  activeCards[currentIdx].classList.remove('show');
-  currentIdx = newIdx;
-  activeCards[currentIdx].classList.add('show');
-  carouselCounter.textContent = `${currentIdx + 1} / ${activeCards.length}`;
+  currentIdx = ((idx % activeCards.length) + activeCards.length) % activeCards.length;
+  positionCards(false);
+  animateCounter(currentIdx + 1, activeCards.length);
+  updateViewAllBtn();
 }
 
 prevBtn && prevBtn.addEventListener('click', () => showCard(currentIdx - 1));
@@ -931,13 +1048,11 @@ document.querySelectorAll('.oracle-icon-btn').forEach(btn => {
     btn.classList.add('active');
 
     activeCards = Array.from(document.querySelectorAll(`.carousel-card[data-tema="${tema}"]`));
-    document.querySelectorAll('.carousel-card').forEach(c => c.classList.remove('show'));
     currentIdx = 0;
 
-    if (activeCards.length) {
-      activeCards[0].classList.add('show');
-      carouselCounter.textContent = `1 / ${activeCards.length}`;
-    }
+    positionCards(true);
+    animateCounter(1, activeCards.length);
+    updateViewAllBtn();
 
     if (carouselThemeLbl) carouselThemeLbl.textContent = label.toUpperCase();
     if (carouselSection) {
@@ -945,47 +1060,37 @@ document.querySelectorAll('.oracle-icon-btn').forEach(btn => {
       carouselSection.classList.add('active');
     }
     if (fullGallery) fullGallery.classList.remove('open');
-    if (viewAllBtn) viewAllBtn.textContent = 'View All Works';
+    if (viewAllBtn) viewAllBtn.textContent = 'Explore Full Gallery';
 
     setTimeout(() => carouselSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
   });
 });
 
-// View All toggle
+// View All toggle — staggered entry animation
 if (viewAllBtn && fullGallery) {
   viewAllBtn.addEventListener('click', () => {
     const open = fullGallery.classList.toggle('open');
-    viewAllBtn.textContent = open ? 'Hide Gallery' : 'View All Works';
-    if (open) setTimeout(() => fullGallery.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+    viewAllBtn.textContent = open ? 'Hide Gallery' : 'Explore Full Gallery';
+    if (open) {
+      fullGallery.querySelectorAll('.fg-item').forEach((item, i) => {
+        item.style.animationDelay = `${i * 38}ms`;
+      });
+      setTimeout(() => fullGallery.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+    } else {
+      fullGallery.querySelectorAll('.fg-item').forEach(item => {
+        item.style.animationDelay = '';
+      });
+    }
   });
 }
 
 // ── Bridge quote reveal ───────────────────────────────────────
 onVisible(document.getElementById('ws-bridge'), el => el.classList.add('bridge-in'), 0.3);
 
-// ── Workshops: GSAP title + text ─────────────────────────────
-(function() {
-  const ws = document.getElementById('workshops');
-  const lines = ws.querySelectorAll('.ws-heading-line span');
-
-  function initWS() {
-    if (typeof gsap === 'undefined') { setTimeout(initWS, 100); return; }
-    const tl = gsap.timeline({ paused: true });
-    tl.to(lines[0], { y: '0%', duration: 1.1, ease: 'power3.out' })
-      .to(lines[1], { y: '0%', duration: 1.1, ease: 'power3.out' }, '-=0.75');
-
-    new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          tl.play();
-          setTimeout(() => ws.classList.add('ws-text-in'), 200);
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 }).observe(ws.querySelector('.ws-heading'));
-  }
-  initWS();
-})();
+// ── Workshops: title + text reveal ───────────────────────────
+onVisible(document.querySelector('#workshops .ws-heading'), el => {
+  document.getElementById('workshops').classList.add('ws-text-in');
+}, 0.15);
 
 // ── Workshops: cards stagger ──────────────────────────────────
 document.querySelectorAll('.ws-card').forEach((card, i) => {
@@ -1000,48 +1105,16 @@ document.querySelectorAll('.ws-card').forEach((card, i) => {
   }, { threshold: 0.2 }).observe(card);
 });
 
-// ── Workshops: editorial mosaic reveal ───────────────────────
-document.querySelectorAll('.ws-pic').forEach(pic => {
-  new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('ws-revealed');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 }).observe(pic);
-});
 
-// ── Workshops: parallax on photos ────────────────────────────
+// ── Workshops: hero parallax ──────────────────────────────────
 (function() {
-  const parallaxPics = [
-    { el: document.querySelector('.ws-pic-a img'), dir: 1,  speed: 0.06 },
-    { el: document.querySelector('.ws-pic-b img'), dir: -1, speed: 0.08 },
-    { el: document.querySelector('.ws-pic-c img'), dir: 1,  speed: 0.07 },
-    { el: document.querySelector('.ws-pic-d img'), dir: -1, speed: 0.06 },
-    { el: document.querySelector('.ws-pic-e img'), dir: 1,  speed: 0.05 },
-  ];
   const heroImg = document.querySelector('.ws-hero img');
-
+  if (!heroImg) return;
   function onScroll() {
-    const scrollY = window.scrollY;
-    // hero parallax
-    if (heroImg) {
-      const rect = heroImg.closest('.ws-hero').getBoundingClientRect();
-      if (rect.bottom > 0 && rect.top < window.innerHeight) {
-        const progress = -rect.top; // px scrolled past hero top
-        heroImg.style.transform = `translateY(${progress * 0.22}px)`;
-      }
+    const rect = heroImg.closest('.ws-hero').getBoundingClientRect();
+    if (rect.bottom > 0 && rect.top < window.innerHeight) {
+      heroImg.style.transform = `translateY(${-rect.top * 0.22}px)`;
     }
-    // mosaic parallax
-    parallaxPics.forEach(({ el, dir, speed }) => {
-      if (!el) return;
-      const rect = el.closest('.ws-pic').getBoundingClientRect();
-      if (rect.bottom > 0 && rect.top < window.innerHeight) {
-        const center = rect.top + rect.height / 2 - window.innerHeight / 2;
-        el.style.transform = `translateY(${center * speed * dir}px)`;
-      }
-    });
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
@@ -1053,3 +1126,4 @@ onVisible(document.querySelector('.ws-cta-block'), el => el.classList.add('ws-ct
 </script>
 </body>
 </html>
+
