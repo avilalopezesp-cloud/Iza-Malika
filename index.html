@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Iza Malika — Painter · Granada</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="64x64" href="images/favicon.png" />
+  <link rel="apple-touch-icon" href="images/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
@@ -37,6 +40,7 @@
       align-items: center; z-index: 500;
     }
     .nav-logo { font-weight: 300; font-size: 1rem; letter-spacing: 0.3em; color: var(--ink); text-decoration: none; text-transform: uppercase; opacity: 0.7; }
+    .nav-right { display: flex; align-items: center; gap: 1.5rem; }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a { font-style: italic; font-size: 0.95rem; letter-spacing: 0.08em; color: var(--ink); text-decoration: none; opacity: 0.45; transition: opacity 0.2s; }
     .nav-links a:hover { opacity: 1; }
@@ -186,7 +190,7 @@
     #carousel-section {
       display: none; padding: 5rem 0 2rem;
       background-color: var(--cream);
-      transition: background-color 1.3s ease;
+      transition: background-color 0.6s ease;
     }
     #carousel-section.active { display: block; }
 
@@ -197,7 +201,7 @@
     }
     .carousel-track {
       position: relative; overflow: hidden; width: 100%;
-      min-height: clamp(440px, 85vw, 620px);
+      min-height: clamp(400px, calc(67.5vw + 90px), 540px);
       display: flex; align-items: center; justify-content: center;
     }
 
@@ -228,7 +232,7 @@
 
     .carousel-controls {
       display: flex; align-items: center; justify-content: center;
-      gap: 2.5rem; margin-top: 2.8rem; padding-bottom: 0.5rem;
+      gap: 2.5rem; margin-top: 1.4rem; padding-bottom: 0.5rem;
     }
     .carousel-arrow {
       background: none; border: 1px solid rgba(42,32,24,0.18);
@@ -244,31 +248,64 @@
       transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16,1,0.3,1);
     }
 
-    /* View All — visible only on last card */
-    .view-all-wrap {
-      text-align: center; padding: 3.5rem 0 2rem;
+    /* Discover another feeling — below carousel */
+    .discover-wrap {
+      text-align: center; padding: 3rem 0 2rem;
       opacity: 0; pointer-events: none;
-      transition: opacity 0.6s ease 0.2s;
+      transition: opacity 0.6s ease 0.4s;
     }
-    .view-all-wrap.last-card-visible { opacity: 1; pointer-events: auto; }
-    .view-all-btn {
+    #carousel-section.active .discover-wrap { opacity: 1; pointer-events: auto; }
+    .discover-btn {
       background: none; border: none; font-family: 'Cormorant Garamond', serif;
       font-size: clamp(0.8rem, 1.4vw, 0.95rem); letter-spacing: 0.38em; color: var(--ink);
       text-transform: uppercase; cursor: none; position: relative; padding-bottom: 5px;
       opacity: 0.45; transition: opacity 0.4s;
     }
-    .view-all-btn::after {
+    .discover-btn::after {
       content: ''; position: absolute; bottom: 0; left: 50%;
       width: 0; height: 1px; background: var(--ink);
       transform: translateX(-50%); transition: width 0.55s cubic-bezier(0.16,1,0.3,1);
     }
-    .view-all-btn:hover { opacity: 0.85; }
-    .view-all-btn:hover::after { width: 100%; }
+    .discover-btn:hover { opacity: 0.85; }
+    .discover-btn:hover::after { width: 100%; }
+
+    /* ═══ ALL WORKS CTA ═══ */
+    #all-works-cta {
+      text-align: center; padding: 5rem 5vw 5rem;
+      border-top: 1px solid rgba(42,32,24,0.07);
+    }
+    .all-works-label {
+      font-size: 0.72rem; letter-spacing: 0.45em; text-transform: uppercase;
+      color: rgba(42,32,24,0.35); margin-bottom: 1.2rem;
+    }
+    .all-works-heading {
+      font-weight: 300; font-size: clamp(1.8rem, 4vw, 3rem);
+      letter-spacing: 0.04em; color: var(--ink); margin-bottom: 0.8rem;
+      line-height: 1.2;
+    }
+    .all-works-sub {
+      font-style: italic; font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+      color: rgba(42,32,24,0.45); margin-bottom: 2.8rem; max-width: 480px; margin-inline: auto;
+    }
+    .all-works-open-btn {
+      position: relative; background: none; border: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.78rem, 1.3vw, 0.9rem); letter-spacing: 0.38em;
+      text-transform: uppercase; color: var(--ink); cursor: none;
+      padding: 1rem 2.8rem; transition: opacity 0.35s;
+    }
+    .all-works-open-btn::before {
+      content: ''; position: absolute; inset: 0;
+      border: 1px solid rgba(42,32,24,0.32);
+      clip-path: inset(0 100% 0 0);
+      transition: clip-path 1.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .all-works-open-btn.border-drawn::before { clip-path: inset(0 0% 0 0); }
+    .all-works-open-btn:hover { opacity: 0.65; }
 
     /* ═══ FULL GALLERY GRID ═══ */
     #full-gallery {
-      display: none; padding: 3rem 5vw 6rem;
-      border-top: 1px solid rgba(42,32,24,0.07);
+      display: none; padding: 0 5vw 6rem;
     }
     #full-gallery.open { display: block; }
     .full-gallery-title {
@@ -276,7 +313,7 @@
       color: rgba(42,32,24,0.38); text-transform: uppercase; margin-bottom: 3rem;
       opacity: 0; animation: none;
     }
-    #full-gallery.open .full-gallery-title {
+    #full-gallery.revealed .full-gallery-title {
       animation: fgFadeUp 0.5s ease forwards;
     }
     .full-gallery-grid {
@@ -306,6 +343,71 @@
       transition: filter 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1);
     }
     .fg-item:hover img { filter: grayscale(0%); transform: scale(1.04); }
+    .fg-item { cursor: pointer; }
+
+    /* ═══ ARTWORK LIGHTBOX ═══ */
+    .artwork-modal {
+      position: fixed; inset: 0; z-index: 2000;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .artwork-modal.open { opacity: 1; pointer-events: auto; }
+    .artwork-modal-backdrop {
+      position: absolute; inset: 0;
+      background: rgba(42,32,24,0.85);
+      backdrop-filter: blur(6px);
+    }
+    .artwork-modal-inner {
+      position: relative; z-index: 1;
+      display: flex; gap: 3.5rem; align-items: flex-start;
+      max-width: 860px; width: 90vw;
+      background: var(--cream); padding: 3rem;
+      transform: translateY(24px);
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
+    }
+    .artwork-modal.open .artwork-modal-inner { transform: translateY(0); }
+    .artwork-modal-close {
+      position: absolute; top: 1rem; right: 1.3rem;
+      background: none; border: none; font-size: 1.6rem; line-height: 1;
+      color: var(--ink); cursor: pointer; opacity: 0.3;
+      transition: opacity 0.3s; font-family: serif;
+    }
+    .artwork-modal-close:hover { opacity: 1; }
+    .modal-img-wrap { width: min(38vw, 280px); flex-shrink: 0; }
+    .modal-img-wrap img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; }
+    .modal-info { flex: 1; display: flex; flex-direction: column; padding-top: 0.5rem; }
+    .modal-titulo {
+      font-weight: 300; font-size: clamp(1.4rem, 3vw, 2rem);
+      letter-spacing: 0.04em; color: var(--ink); margin: 0 0 0.4rem;
+    }
+    .modal-medium {
+      font-style: italic; font-size: 0.82rem; letter-spacing: 0.12em;
+      color: var(--rose); margin: 0;
+    }
+    .modal-year {
+      font-size: 0.72rem; letter-spacing: 0.3em; color: rgba(42,32,24,0.35);
+      text-transform: uppercase; margin: 0.3rem 0 0;
+    }
+    .modal-desc {
+      font-size: clamp(0.9rem, 1.4vw, 1rem); line-height: 1.75;
+      color: rgba(42,32,24,0.6); font-style: italic;
+      margin: 1.4rem 0 2rem; flex: 1;
+    }
+    .modal-wa-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 1px solid rgba(42,32,24,0.22);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.8rem; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--ink); text-decoration: none;
+      padding: 0.9rem 2rem; align-self: flex-start;
+      transition: background 0.35s, color 0.35s, border-color 0.35s;
+    }
+    .modal-wa-btn:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+    @media (max-width: 600px) {
+      .artwork-modal-inner { flex-direction: column; gap: 1.5rem; padding: 2rem 1.5rem; }
+      .modal-img-wrap { width: 100%; }
+    }
 
     /* ═══ BRIDGE ═══ */
     #ws-bridge {
@@ -374,35 +476,59 @@
     /* Subhead */
     .ws-subhead {
       font-style: italic; font-size: clamp(1rem, 2vw, 1.2rem);
-      color: rgba(42,32,24,0.5); line-height: 1.85; margin-bottom: 5.5rem;
+      color: rgba(42,32,24,0.65); line-height: 1.85; margin-bottom: 4rem;
       opacity: 0; transform: translateY(20px);
       transition: opacity 1.1s ease 0.5s, transform 1.1s ease 0.5s;
     }
     #workshops.ws-text-in .ws-subhead { opacity: 1; transform: translateY(0); }
 
     /* 3 — Cards */
-    .ws-cards { display: flex; flex-direction: column; margin-bottom: 7rem; }
+    .ws-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.2rem; margin-bottom: 6rem; }
     .ws-card {
-      display: grid; grid-template-columns: 1.8rem 1fr;
-      align-items: start; gap: 1.8rem;
-      padding: 2.2rem 0;
-      border-bottom: 1px solid rgba(42,32,24,0.06);
-      opacity: 0; transform: translateY(30px);
-      transition: opacity 0.95s ease, transform 0.95s cubic-bezier(0.16,1,0.3,1);
+      display: flex; flex-direction: column;
+      padding: 2rem 1.8rem 2.2rem;
+      border: 1px solid rgba(42,32,24,0.09);
+      background: rgba(42,32,24,0.02);
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.85s ease, transform 0.85s cubic-bezier(0.16,1,0.3,1),
+                  background 0.35s ease, box-shadow 0.35s ease;
+      cursor: default;
     }
-    .ws-card:first-child { border-top: 1px solid rgba(42,32,24,0.06); }
+    .ws-card:hover {
+      background: rgba(42,32,24,0.05);
+      box-shadow: 0 8px 32px rgba(42,32,24,0.06);
+      transform: translateY(-3px);
+    }
     .ws-card.ws-card-in { opacity: 1; transform: translateY(0); }
+    .ws-card:hover { transform: translateY(-3px); }
+
+    /* Circle dot — draws on scroll */
     .ws-card-dot {
-      width: 9px; height: 9px; border-radius: 50%;
-      border: 1px solid var(--rose); margin-top: 0.65rem; flex-shrink: 0;
+      width: 28px; height: 28px; margin-bottom: 1.4rem; flex-shrink: 0;
     }
+    .ws-card-dot circle {
+      fill: none; stroke: var(--rose); stroke-width: 1;
+      stroke-dasharray: 88; stroke-dashoffset: 88;
+      transition: stroke-dashoffset 0.8s cubic-bezier(0.16,1,0.3,1);
+    }
+    .ws-card.ws-card-in .ws-card-dot circle { stroke-dashoffset: 0; }
+
     .ws-card-title {
-      font-weight: 300; font-size: clamp(1.1rem, 2.2vw, 1.5rem);
-      letter-spacing: 0.04em; color: var(--ink); margin-bottom: 0.35rem;
+      font-weight: 300; font-size: clamp(1rem, 1.8vw, 1.25rem);
+      letter-spacing: 0.04em; color: var(--ink); margin-bottom: 0.5rem;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 0.6s ease 0.5s, transform 0.6s ease 0.5s;
     }
+    .ws-card.ws-card-in .ws-card-title { opacity: 1; transform: translateY(0); }
     .ws-card-desc {
-      font-style: italic; font-size: 0.9rem;
-      color: rgba(42,32,24,0.42); line-height: 1.7;
+      font-style: italic; font-size: 0.88rem;
+      color: rgba(42,32,24,0.48); line-height: 1.7;
+      opacity: 0; transform: translateY(6px);
+      transition: opacity 0.6s ease 0.7s, transform 0.6s ease 0.7s;
+    }
+    .ws-card.ws-card-in .ws-card-desc { opacity: 1; transform: translateY(0); }
+    @media (max-width: 640px) {
+      .ws-cards { grid-template-columns: 1fr; gap: 0.8rem; }
     }
 
     /* 4 — Editorial photo mosaic */
@@ -462,28 +588,67 @@
 
     /* 6 — CTA */
     .ws-cta-block {
-      text-align: center; padding: 0 6vw 9rem;
+      padding: 0 6vw 8rem;
       opacity: 0; transform: translateY(24px);
       transition: opacity 1s ease 0.2s, transform 1s cubic-bezier(0.16,1,0.3,1) 0.2s;
     }
     .ws-cta-block.ws-cta-in { opacity: 1; transform: translateY(0); }
+    .ws-cta-divider {
+      border: none; border-top: 1px solid rgba(42,32,24,0.12); margin: 0;
+    }
+    .ws-location {
+      text-align: center; padding: 2.8rem 0 0.5rem;
+      font-style: italic; font-size: clamp(0.78rem, 1.2vw, 0.88rem);
+      letter-spacing: 0.06em; line-height: 2;
+      color: rgba(42,32,24,0.32);
+    }
+    .ws-cta-rows {
+      display: flex; align-items: stretch; gap: 2rem;
+      padding: 3rem 0;
+    }
+    .ws-cta-row {
+      flex: 1; display: flex; flex-direction: column; align-items: center;
+      text-align: center; padding: 3.2rem 2.5rem;
+      background: rgba(42,32,24,0.03);
+      border: 1px solid rgba(42,32,24,0.1);
+      position: relative; overflow: hidden;
+      cursor: pointer;
+      transition: background 0.4s ease, transform 0.45s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease;
+    }
+    .ws-cta-row::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 0; height: 2px; background: var(--ink);
+      transition: width 0.55s cubic-bezier(0.16,1,0.3,1);
+    }
+    .ws-cta-row:hover {
+      background: rgba(42,32,24,0.06);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(42,32,24,0.08);
+    }
+    .ws-cta-row:hover::after { width: 100%; }
+    .ws-cta-row:hover .ws-cta-btn {
+      background: var(--ink); color: var(--cream); border-color: var(--ink);
+    }
+    @media (max-width: 600px) {
+      .ws-cta-rows { flex-direction: column; gap: 1.2rem; padding: 2rem 0; }
+    }
     .ws-cta-heading {
-      font-weight: 300; font-size: clamp(1.6rem, 3.8vw, 3rem);
-      letter-spacing: 0.04em; color: var(--ink); margin-bottom: 1.4rem; line-height: 1.1;
+      font-weight: 300; font-size: clamp(1.3rem, 2.8vw, 2rem);
+      letter-spacing: 0.04em; color: var(--ink); margin: 0 0 1rem; line-height: 1.2;
     }
     .ws-cta-sub {
-      font-style: italic; font-size: clamp(0.9rem, 1.6vw, 1.05rem);
-      color: rgba(42,32,24,0.45); max-width: 480px; margin: 0 auto 3.5rem; line-height: 1.8;
+      font-style: italic; font-size: clamp(0.88rem, 1.5vw, 1rem);
+      color: rgba(42,32,24,0.45); max-width: 440px; margin: 0 0 2.2rem; line-height: 1.8;
     }
     .ws-cta-btn {
       display: inline-block; font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(0.82rem, 1.4vw, 0.96rem); letter-spacing: 0.38em;
-      text-transform: uppercase; color: var(--cream); text-decoration: none;
-      background: var(--ink); padding: 1.1rem 3.5rem;
-      border: 1px solid var(--ink); cursor: none;
-      transition: background 0.45s ease, color 0.45s ease;
+      font-size: clamp(0.78rem, 1.3vw, 0.9rem); letter-spacing: 0.38em;
+      text-transform: uppercase; color: var(--ink); text-decoration: none;
+      background: none; padding: 0.9rem 2.6rem;
+      border: 1px solid rgba(42,32,24,0.28); cursor: none;
+      transition: background 0.35s ease, color 0.35s ease, border-color 0.35s;
     }
-    .ws-cta-btn:hover { background: transparent; color: var(--ink); }
+    .ws-cta-btn:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
 
     @media (max-width: 640px) {
       .ws-hero { height: 70vh; }
@@ -494,21 +659,109 @@
 
     /* ═══ FOOTER ═══ */
     footer {
-      background: var(--ink); padding: 4rem 3rem;
+      background: var(--ink); padding: 4rem 3rem 2rem;
+      display: flex; flex-direction: column; align-items: center; gap: 2.5rem;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.16,1,0.3,1);
+    }
+    footer.footer-in { opacity: 1; transform: translateY(0); }
+    .footer-top {
       display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 1.5rem;
+      width: 100%; flex-wrap: wrap; gap: 1.5rem;
     }
     .footer-name { font-weight: 300; font-size: 1.5rem; letter-spacing: 0.2em; color: var(--cream); opacity: 0.8; }
-    .footer-ig { font-style: italic; font-size: 0.9rem; letter-spacing: 0.1em; color: var(--gold); text-decoration: none; opacity: 0.7; transition: opacity 0.2s; }
+    .footer-ig {
+      font-style: italic; font-size: 0.9rem; letter-spacing: 0.1em;
+      color: var(--gold); text-decoration: none; opacity: 0.7;
+      transition: opacity 0.3s ease, letter-spacing 0.3s ease;
+      display: inline-flex; align-items: center; gap: 0;
+    }
+    .footer-ig::after {
+      content: ' ↗'; font-style: normal; font-size: 0.75em;
+      opacity: 0; transform: translate(-4px, 2px);
+      display: inline-block;
+      transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.16,1,0.3,1);
+    }
     .footer-ig:hover { opacity: 1; }
+    .footer-ig:hover::after { opacity: 1; transform: translate(0, 0); }
+    .footer-tagline {
+      font-style: italic; font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+      letter-spacing: 0.06em; color: rgba(245,237,224,0.38);
+      text-align: center;
+    }
+    .footer-bottom {
+      width: 100%; text-align: center;
+      border-top: 1px solid rgba(245,237,224,0.08); padding-top: 1.8rem;
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    }
+    .footer-copy {
+      font-size: 0.78rem; letter-spacing: 0.18em; color: rgba(245,237,224,0.58);
+    }
+    .footer-crafted {
+      font-style: italic; font-size: 0.68rem; letter-spacing: 0.12em;
+      color: rgba(245,237,224,0.28);
+    }
+
+    /* ═══ LANGUAGE TOGGLE ═══ */
+    .lang-toggle {
+      background: none; border: 1px solid rgba(42,32,24,0.22);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(42,32,24,0.55); cursor: pointer;
+      padding: 0.3rem 0.6rem; transition: color 0.2s, border-color 0.2s;
+      flex-shrink: 0;
+    }
+    .lang-toggle:hover { color: var(--ink); border-color: rgba(42,32,24,0.45); }
+    .lang-toggle-mobile {
+      border-color: rgba(42,32,24,0.3); color: rgba(42,32,24,0.5);
+      font-size: 0.9rem; padding: 0.5rem 1.2rem;
+    }
+
+    /* ═══ HAMBURGER MENU ═══ */
+    .nav-hamburger {
+      display: none; background: none; border: none;
+      cursor: pointer; padding: 4px; flex-direction: column;
+      justify-content: center; gap: 5px; z-index: 600;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 1.5px;
+      background: var(--ink); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease;
+      transform-origin: center;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .nav-mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 550;
+      background: var(--cream); flex-direction: column;
+      align-items: center; justify-content: center; gap: 3rem;
+      opacity: 0; transition: opacity 0.4s ease;
+    }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-mobile-menu.visible { opacity: 1; }
+    .nav-mobile-menu a {
+      font-style: italic; font-size: clamp(2rem, 8vw, 3rem);
+      letter-spacing: 0.06em; color: var(--ink); text-decoration: none;
+      opacity: 0.55; transition: opacity 0.2s;
+    }
+    .nav-mobile-menu a:hover { opacity: 1; }
 
     /* ═══ UTILS ═══ */
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-    @media (max-width: 600px) {
-      nav { padding: 1.5rem; }
-      .nav-links { gap: 1.2rem; }
+    @media (max-width: 640px) {
+      nav { padding: 1.4rem 1.5rem; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
       .oracle-icons { gap: 1rem; }
       .oracle-icon-btn { padding: 1.6rem 1.8rem; }
+      /* Reduce vertical spacing on mobile */
+      #oracle { padding: 6rem 5vw 5rem; }
+      .ws-inner { padding: 4rem 5vw 0; }
+      .ws-cards { margin-bottom: 4rem; }
+      .ws-editorial { margin-bottom: 4rem; }
+      #all-works-cta { padding: 3.5rem 5vw 3.5rem; }
+      .ws-cta-block { padding: 0 4vw 5rem; }
     }
   </style>
 </head>
@@ -519,12 +772,25 @@
 
 <nav>
   <a href="#" class="nav-logo">Iza Malika</a>
-  <ul class="nav-links">
-    <li><a href="#oracle">Explore</a></li>
-    <li><a href="#workshops">Workshops</a></li>
-    <li><a href="https://instagram.com/iza.groot" target="_blank">Instagram</a></li>
-  </ul>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#oracle" data-i18n="nav-explore">Explore</a></li>
+      <li><a href="#workshops" data-i18n="nav-workshops">Workshops</a></li>
+      <li><a href="https://instagram.com/iza.groot" target="_blank">Instagram</a></li>
+    </ul>
+    <button class="lang-toggle" id="lang-toggle" aria-label="Switch language">ES</button>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
+
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <a href="#oracle" class="nav-mobile-link" data-i18n="nav-explore">Explore</a>
+  <a href="#workshops" class="nav-mobile-link" data-i18n="nav-workshops">Workshops</a>
+  <a href="https://instagram.com/iza.groot" target="_blank" class="nav-mobile-link">Instagram</a>
+  <button class="lang-toggle lang-toggle-mobile" id="lang-toggle-mobile" aria-label="Switch language">ES</button>
+</div>
 
 <!-- ═══ HERO ═══ -->
 <div id="hero-scroll">
@@ -534,7 +800,7 @@
     </div>
     <div class="hero-center">
       <h1 class="hero-name">Iza Malika</h1>
-      <p class="hero-sub">Endlessly creating</p>
+      <p class="hero-sub" data-i18n="hero-sub">Endlessly creating</p>
     </div>
     <div class="hero-scroll-hint">
       <div class="hint-line"></div>
@@ -545,11 +811,11 @@
 <!-- ═══ MANIFESTO ═══ -->
 <section id="manifesto">
   <div class="frase-inner">
-    <span class="frase-linea"><span class="frase-linea-inner">For me, art is</span></span>
-    <span class="frase-linea"><span class="frase-linea-inner frase-accent">stopping time —</span></span>
-    <span class="frase-linea"><span class="frase-linea-inner">a way to listen to nature,</span></span>
-    <span class="frase-linea"><span class="frase-linea-inner">to <span class="frase-gold">magic</span>, to the quiet voice</span></span>
-    <span class="frase-linea"><span class="frase-linea-inner frase-accent">that lives inside.</span></span>
+    <span class="frase-linea"><span class="frase-linea-inner" data-i18n="manifesto-1">For me, art is</span></span>
+    <span class="frase-linea"><span class="frase-linea-inner frase-accent" data-i18n="manifesto-2">stopping time —</span></span>
+    <span class="frase-linea"><span class="frase-linea-inner" data-i18n="manifesto-3">a way to listen to nature,</span></span>
+    <span class="frase-linea"><span class="frase-linea-inner" data-i18n="manifesto-4">to <span class="frase-gold">magic</span>, to the quiet voice</span></span>
+    <span class="frase-linea"><span class="frase-linea-inner frase-accent" data-i18n="manifesto-5">that lives inside.</span></span>
   </div>
 </section>
 
@@ -560,26 +826,26 @@
   </div>
   <div class="about-text">
     <h2 class="about-nombre">Iza<br>Malika</h2>
-    <p class="about-desc">I believe art begins with intuition. Painting is my way of slowing down, reconnecting with nature and expressing what words often can't.</p>
+    <p class="about-desc" data-i18n="about-desc">I believe art begins with intuition. Painting is my way of slowing down, reconnecting with nature and expressing what words often can't.</p>
   </div>
 </section>
 
 <!-- ═══ ORACLE ═══ -->
 <section id="oracle">
-  <p class="oracle-question">How are you feeling today?</p>
-  <p class="oracle-sub">Choose the emotion that resonates with you and discover artworks inspired by that feeling.</p>
+  <p class="oracle-question" data-i18n="oracle-question">How are you feeling today?</p>
+  <p class="oracle-sub" data-i18n="oracle-sub">Choose the emotion that resonates with you and discover artworks inspired by that feeling.</p>
   <div class="oracle-icons">
-    <button class="oracle-icon-btn" data-tema="sol" data-color="#EDE8E0" data-label="Sun">
+    <button class="oracle-icon-btn" data-tema="sol" data-color="#EDE8E0" data-label="Sun" data-label-es="Sol">
       <span class="oracle-emoji">☀️</span>
-      <span class="oracle-label">Sun</span>
+      <span class="oracle-label" data-i18n="oracle-sun">Sun</span>
     </button>
-    <button class="oracle-icon-btn" data-tema="magia" data-color="#EAE5F0" data-label="Magic">
+    <button class="oracle-icon-btn" data-tema="magia" data-color="#EAE5F0" data-label="Magic" data-label-es="Magia">
       <span class="oracle-emoji">🔮</span>
-      <span class="oracle-label">Magic</span>
+      <span class="oracle-label" data-i18n="oracle-magic">Magic</span>
     </button>
-    <button class="oracle-icon-btn" data-tema="naturaleza" data-color="#E2EBE2" data-label="Nature">
+    <button class="oracle-icon-btn" data-tema="naturaleza" data-color="#E2EBE2" data-label="Nature" data-label-es="Naturaleza">
       <span class="oracle-emoji">🌿</span>
-      <span class="oracle-label">Nature</span>
+      <span class="oracle-label" data-i18n="oracle-nature">Nature</span>
     </button>
   </div>
 </section>
@@ -667,40 +933,66 @@
     <button class="carousel-arrow" id="carousel-next">→</button>
   </div>
 
-  <div class="view-all-wrap">
-    <button class="view-all-btn" id="view-all-btn">View All Works</button>
+  <div class="discover-wrap">
+    <button class="discover-btn" id="discover-btn" data-i18n="discover-btn">↑ Discover another feeling</button>
   </div>
+</section>
+
+<!-- ═══ ALL WORKS CTA ═══ -->
+<section id="all-works-cta">
+  <p class="all-works-label" data-i18n="all-works-label">Continue exploring.</p>
+  <h2 class="all-works-heading" data-i18n="all-works-heading">Every painting begins<br>with a feeling.</h2>
+  <p class="all-works-sub" data-i18n="all-works-sub">Acrylics, watercolors, mandalas and portraits — each piece born from a feeling, a moment, an impulse to create.</p>
+  <button class="all-works-open-btn" id="all-works-open-btn" data-i18n="all-works-btn">Discover the Collection</button>
 </section>
 
 <!-- ═══ FULL GALLERY ═══ -->
 <section id="full-gallery">
-  <p class="full-gallery-title">All Works</p>
+  <p class="full-gallery-title" data-i18n="gallery-title">All Works</p>
   <div class="full-gallery-grid">
-    <div class="fg-item"><img src="images/obras/sol-montana.jpg" alt="The Sun and the Mountain" loading="lazy" /></div>
-    <div class="fg-item"><img src="images/obras/mandala-sol.jpg" alt="Solar Mandala" loading="lazy" /></div>
-    <div class="fg-item"><img src="images/obras/flor-dorada.jpg" alt="Golden Flower" loading="lazy" /></div>
-    <div class="fg-item"><img src="images/obras/mandala-blanca.jpg" alt="White Mandala" loading="lazy" /></div>
-    <div class="fg-item"><img src="images/obras/flamenco.jpg" alt="Flamenco" loading="lazy" /></div>
-    <div class="fg-item"><img src="images/obras/luna-mistica.jpg" alt="The Mystic Moon" loading="lazy" /></div>
-    <div class="fg-item"><img src="images/obras/mandala-purpura.jpg" alt="Purple Mandala" loading="lazy" /></div>
-    <div class="fg-item"><img src="images/obras/mujer-viento.jpg" alt="Woman in the Wind" loading="lazy" /></div>
-    <div class="fg-item"><img src="images/obras/mandala-lavanda.jpg" alt="Lavender Mandala" loading="lazy" /></div>
-    <div class="fg-item"><img src="images/obras/luna-mujer.jpg" alt="Moon Woman" loading="lazy" /></div>
-    <div class="fg-item"><img src="images/obras/diosa-acuarela.jpg" alt="Watercolor Goddess" loading="lazy" /></div>
-    <div class="fg-item"><img src="images/obras/plantas-verdes.jpg" alt="Green Plants" loading="lazy" /></div>
-    <div class="fg-item"><img src="images/obras/silueta-hojas.jpg" alt="Silhouette &amp; Leaves" loading="lazy" /></div>
-    <div class="fg-item"><img src="images/obras/botanica.jpg" alt="Botanica" loading="lazy" /></div>
-    <div class="fg-item"><img src="images/obras/cuerpo-flores.jpg" alt="Body in Bloom" loading="lazy" /></div>
-    <div class="fg-item"><img src="images/obras/bailarina-verde.jpg" alt="Green Dancer" loading="lazy" /></div>
-    <div class="fg-item"><img src="images/obras/retrato-femenino.jpg" alt="Female Portrait" loading="lazy" /></div>
+    <div class="fg-item" data-titulo="The Sun and the Mountain" data-medium="Acrylic · 50×40 cm" data-year="2024" data-desc="Where light meets stone, the sun finds its throne. A piece about warmth, permanence and the power of rising."><img src="images/obras/sol-montana.jpg" alt="The Sun and the Mountain" loading="lazy" /></div>
+    <div class="fg-item" data-titulo="Solar Mandala" data-medium="Acrylic · 30×40 cm" data-year="2024" data-desc="Sacred geometry bathed in golden light. Each ring a reminder that everything begins and ends at the center."><img src="images/obras/mandala-sol.jpg" alt="Solar Mandala" loading="lazy" /></div>
+    <div class="fg-item" data-titulo="Golden Flower" data-medium="Acrylic on canvas" data-year="2024" data-desc="A bloom that carries the warmth of summer within. Painted during a season of renewal and quiet joy."><img src="images/obras/flor-dorada.jpg" alt="Golden Flower" loading="lazy" /></div>
+    <div class="fg-item" data-titulo="White Mandala" data-medium="Acrylic · 30×40 cm" data-year="2023" data-desc="Pure patterns woven in silence and light. A meditation on simplicity and the beauty of empty space."><img src="images/obras/mandala-blanca.jpg" alt="White Mandala" loading="lazy" /></div>
+    <div class="fg-item" data-titulo="Flamenco" data-medium="Acrylic on canvas" data-year="2024" data-desc="The fire in movement, the soul in color. An ode to the passion that lives in every step, every turn."><img src="images/obras/flamenco.jpg" alt="Flamenco" loading="lazy" /></div>
+    <div class="fg-item" data-titulo="The Mystic Moon" data-medium="Acrylic · 40×50 cm" data-year="2024" data-desc="She watches over what the sun cannot see. A tribute to the quiet magic of nighttime and inner knowing."><img src="images/obras/luna-mistica.jpg" alt="The Mystic Moon" loading="lazy" /></div>
+    <div class="fg-item" data-titulo="Purple Mandala" data-medium="Acrylic on canvas" data-year="2024" data-desc="Where violet dreams spiral into infinity. A portal of color and intention, painted in a single breath."><img src="images/obras/mandala-purpura.jpg" alt="Purple Mandala" loading="lazy" /></div>
+    <div class="fg-item" data-titulo="Woman in the Wind" data-medium="Acrylic on paper" data-year="2025" data-desc="She lets go of everything that no longer serves her. Hair as wings, spirit as sky. A celebration of release."><img src="images/obras/mujer-viento.jpg" alt="Woman in the Wind" loading="lazy" /></div>
+    <div class="fg-item" data-titulo="Lavender Mandala" data-medium="Acrylic on canvas" data-year="2023" data-desc="Soft and deliberate, like a whispered intention. A piece that asks you to slow down and breathe."><img src="images/obras/mandala-lavanda.jpg" alt="Lavender Mandala" loading="lazy" /></div>
+    <div class="fg-item" data-titulo="Moon Woman" data-medium="Acrylic on canvas" data-year="2024" data-desc="Her cycles are the moon's, her power, her own. A portrait of feminine energy in its fullest, truest form."><img src="images/obras/luna-mujer.jpg" alt="Moon Woman" loading="lazy" /></div>
+    <div class="fg-item" data-titulo="Watercolor Goddess" data-medium="Watercolor on paper" data-year="2024" data-desc="A goddess born of color and impermanence. She dissolves at the edges, reminding us that beauty doesn't need borders."><img src="images/obras/diosa-acuarela.jpg" alt="Watercolor Goddess" loading="lazy" /></div>
+    <div class="fg-item" data-titulo="Green Plants" data-medium="Acrylic on canvas" data-year="2025" data-desc="Life reaching upward, quietly and with certainty. A piece about growth, patience and the intelligence of nature."><img src="images/obras/plantas-verdes.jpg" alt="Green Plants" loading="lazy" /></div>
+    <div class="fg-item" data-titulo="Silhouette &amp; Leaves" data-medium="Acrylic · 50×60 cm" data-year="2024" data-desc="The body and the forest, one and the same. Where human form meets wild green, there is no separation."><img src="images/obras/silueta-hojas.jpg" alt="Silhouette &amp; Leaves" loading="lazy" /></div>
+    <div class="fg-item" data-titulo="Botanica" data-medium="Acrylic on canvas" data-year="2024" data-desc="Nature drawn from memory and wonder. A botanical study that became something more — something felt, not just observed."><img src="images/obras/botanica.jpg" alt="Botanica" loading="lazy" /></div>
+    <div class="fg-item" data-titulo="Body in Bloom" data-medium="Acrylic · 50×40 cm" data-year="2025" data-desc="When the body becomes a garden. A celebration of softness, color and the courage to grow in full view."><img src="images/obras/cuerpo-flores.jpg" alt="Body in Bloom" loading="lazy" /></div>
+    <div class="fg-item" data-titulo="Green Dancer" data-medium="Acrylic on canvas" data-year="2024" data-desc="Movement as meditation, color as breath. She dances not to be seen, but to feel alive."><img src="images/obras/bailarina-verde.jpg" alt="Green Dancer" loading="lazy" /></div>
+    <div class="fg-item" data-titulo="Female Portrait" data-medium="Acrylic on canvas" data-year="2024" data-desc="The quiet power in a gaze. A portrait that asks to be looked at slowly, and with patience."><img src="images/obras/retrato-femenino.jpg" alt="Female Portrait" loading="lazy" /></div>
   </div>
 </section>
 
+<!-- ═══ ARTWORK LIGHTBOX MODAL ═══ -->
+<div id="artwork-modal" class="artwork-modal" role="dialog" aria-modal="true">
+  <div class="artwork-modal-backdrop"></div>
+  <div class="artwork-modal-inner">
+    <button class="artwork-modal-close" aria-label="Close">×</button>
+    <div class="modal-img-wrap">
+      <img id="modal-img" src="" alt="" />
+    </div>
+    <div class="modal-info">
+      <h2 class="modal-titulo" id="modal-titulo"></h2>
+      <p class="modal-medium" id="modal-medium"></p>
+      <p class="modal-year" id="modal-year"></p>
+      <p class="modal-desc" id="modal-desc"></p>
+      <a class="modal-wa-btn" id="modal-wa-btn" href="" target="_blank" rel="noopener" data-i18n="modal-wa-btn">I'm interested</a>
+    </div>
+  </div>
+</div>
+
 <!-- ═══ BRIDGE ═══ -->
 <section id="ws-bridge">
-  <span class="bridge-line"><span class="bridge-line-inner">Art is personal.</span></span>
-  <span class="bridge-line"><span class="bridge-line-inner">But it's even more powerful</span></span>
-  <span class="bridge-line"><span class="bridge-line-inner">when it's shared.</span></span>
+  <span class="bridge-line"><span class="bridge-line-inner" data-i18n="bridge-1">Art is personal.</span></span>
+  <span class="bridge-line"><span class="bridge-line-inner" data-i18n="bridge-2">But it's even more powerful</span></span>
+  <span class="bridge-line"><span class="bridge-line-inner" data-i18n="bridge-3">when it's shared.</span></span>
 </section>
 
 <!-- ═══ WORKSHOPS ═══ -->
@@ -709,39 +1001,33 @@
   <!-- 1. Hero photo -->
   <div class="ws-hero">
     <img src="images/workshops/ws-8.jpg" alt="Painting Together" loading="lazy">
-    <span class="ws-hero-label">Painting Together</span>
+    <span class="ws-hero-label" data-i18n="ws-hero-label">Painting Together</span>
   </div>
 
   <!-- 2. Text content -->
   <div class="ws-inner">
     <h2 class="ws-heading">
-      <span class="ws-heading-line"><span>Creative</span></span>
-      <span class="ws-heading-line"><span>Experiences</span></span>
+      <span class="ws-heading-line"><span data-i18n="ws-heading-1">Creative</span></span>
+      <span class="ws-heading-line"><span data-i18n="ws-heading-2">Experiences</span></span>
     </h2>
-    <p class="ws-subhead">More than learning how to paint, these workshops create space to slow down, reconnect with yourself and enjoy making something with your own hands. Every session is different because every group brings its own energy.</p>
+    <p class="ws-subhead" data-i18n="ws-subhead">More than learning how to paint, these workshops create space to slow down, reconnect with yourself and enjoy making something with your own hands. Every session is different because every group brings its own energy.</p>
 
     <!-- 3. Cards -->
     <div class="ws-cards">
       <div class="ws-card">
-        <span class="ws-card-dot"></span>
-        <div>
-          <p class="ws-card-title">No experience needed</p>
-          <p class="ws-card-desc">Come exactly as you are.</p>
-        </div>
+        <svg class="ws-card-dot" viewBox="0 0 28 28"><circle cx="14" cy="14" r="13"/></svg>
+        <p class="ws-card-title" data-i18n="ws-card-1-title">No experience needed</p>
+        <p class="ws-card-desc" data-i18n="ws-card-1-desc">Come exactly as you are.</p>
       </div>
       <div class="ws-card">
-        <span class="ws-card-dot"></span>
-        <div>
-          <p class="ws-card-title">Everything is provided</p>
-          <p class="ws-card-desc">Just bring your curiosity.</p>
-        </div>
+        <svg class="ws-card-dot" viewBox="0 0 28 28"><circle cx="14" cy="14" r="13"/></svg>
+        <p class="ws-card-title" data-i18n="ws-card-2-title">Everything is provided</p>
+        <p class="ws-card-desc" data-i18n="ws-card-2-desc">Just bring your curiosity.</p>
       </div>
       <div class="ws-card">
-        <span class="ws-card-dot"></span>
-        <div>
-          <p class="ws-card-title">Hosted anywhere</p>
-          <p class="ws-card-desc">Hostels · Cafés · Retreats · Creative Spaces</p>
-        </div>
+        <svg class="ws-card-dot" viewBox="0 0 28 28"><circle cx="14" cy="14" r="13"/></svg>
+        <p class="ws-card-title" data-i18n="ws-card-3-title">Hosted anywhere</p>
+        <p class="ws-card-desc" data-i18n="ws-card-3-desc">Hostels · Cafés · Retreats · Creative Spaces</p>
       </div>
     </div>
   </div>
@@ -750,43 +1036,59 @@
   <div class="ws-editorial">
     <div class="ws-pic ws-pic-a">
       <img src="images/workshops/ws-3.jpg" alt="Workshop community" loading="lazy">
-      <span class="ws-note">No one knew each other at the beginning.</span>
+      <span class="ws-note" data-i18n="ws-note-1">No one knew each other at the beginning.</span>
     </div>
     <div class="ws-pic ws-pic-b">
       <img src="images/workshops/ws-6.jpg" alt="Creating together" loading="lazy">
-      <span class="ws-note">Two hours later, everyone was smiling.</span>
+      <span class="ws-note" data-i18n="ws-note-2">Two hours later, everyone was smiling.</span>
     </div>
     <div class="ws-pic ws-pic-c">
       <img src="images/workshops/ws-2.jpg" alt="In the flow" loading="lazy">
-      <span class="ws-note">No experience. Just curiosity.</span>
+      <span class="ws-note" data-i18n="ws-note-3">No experience. Just curiosity.</span>
     </div>
     <div class="ws-pic ws-pic-d">
       <img src="images/workshops/ws-4.jpg" alt="Painting detail" loading="lazy">
-      <span class="ws-note">Every stroke tells something you didn't plan.</span>
+      <span class="ws-note" data-i18n="ws-note-4">Every stroke tells something you didn't plan.</span>
     </div>
     <div class="ws-pic ws-pic-e">
       <img src="images/workshops/ws-5.jpg" alt="Color and life" loading="lazy">
-      <span class="ws-note">The mess is part of it.</span>
+      <span class="ws-note" data-i18n="ws-note-5">The mess is part of it.</span>
     </div>
   </div>
 
   <!-- 5. Quote -->
   <div class="ws-quote-wrap">
-    <p class="ws-quote">Art brings<br><span class="ws-quote-people">people</span> together.</p>
+    <p class="ws-quote" data-i18n="ws-quote">Art brings<br><span class="ws-quote-people">people</span> together.</p>
   </div>
 
   <!-- 6. CTA -->
   <div class="ws-cta-block">
-    <h3 class="ws-cta-heading">Let's create something together.</h3>
-    <p class="ws-cta-sub">Looking for a creative experience for your hostel, retreat or community? I'd love to create something unique with you.</p>
-    <a href="https://instagram.com/iza.groot" target="_blank" class="ws-cta-btn">Let's Talk</a>
+    <hr class="ws-cta-divider">
+    <div class="ws-cta-rows">
+      <div class="ws-cta-row">
+        <h3 class="ws-cta-heading" data-i18n="ws-cta-h1">Interested in an artwork?</h3>
+        <a href="https://wa.me/31610291900?text=Hi%20Iza!%20I%20came%20across%20your%20work%20and%20one%20of%20your%20paintings%20really%20resonated%20with%20me.%20I%27d%20love%20to%20know%20more%20about%20it." target="_blank" rel="noopener" class="ws-cta-btn" data-i18n="ws-cta-btn1" id="ws-cta-btn1">Ask about an artwork</a>
+      </div>
+      <div class="ws-cta-row">
+        <h3 class="ws-cta-heading" data-i18n="ws-cta-h2">Want to host a workshop?</h3>
+        <a href="https://wa.me/31610291900?text=Hi%20Iza!%20I%27m%20interested%20in%20hosting%20a%20painting%20workshop.%20I%27d%20love%20to%20create%20something%20special%20for%20my%20community." target="_blank" rel="noopener" class="ws-cta-btn" data-i18n="ws-cta-btn2" id="ws-cta-btn2">Let's create together</a>
+      </div>
+    </div>
+    <hr class="ws-cta-divider">
   </div>
 
 </section>
 
 <footer>
-  <span class="footer-name">Iza Malika</span>
-  <a href="https://instagram.com/iza.groot" target="_blank" class="footer-ig">@iza.groot</a>
+  <div class="footer-top">
+    <span class="footer-name">Iza Malika</span>
+    <a href="https://instagram.com/iza.groot" target="_blank" class="footer-ig">@iza.groot</a>
+  </div>
+  <p class="footer-tagline" data-i18n="footer-tagline">Thank you for visiting my world.</p>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Iza Malika</span>
+    <span class="footer-crafted">Crafted by Sebastián Ávila</span>
+  </div>
 </footer>
 
 <script>
@@ -940,16 +1242,10 @@ const carouselCounter   = document.getElementById('carousel-counter');
 const carouselThemeLbl  = document.getElementById('carousel-theme-label');
 const prevBtn           = document.getElementById('carousel-prev');
 const nextBtn           = document.getElementById('carousel-next');
-const viewAllBtn        = document.getElementById('view-all-btn');
 const fullGallery       = document.getElementById('full-gallery');
 
 let activeCards = [], currentIdx = 0;
 
-function updateViewAllBtn() {
-  const wrap = document.querySelector('.view-all-wrap');
-  if (!wrap) return;
-  wrap.classList.toggle('last-card-visible', activeCards.length > 0 && currentIdx === activeCards.length - 1);
-}
 
 function animateCounter(current, total) {
   if (!carouselCounter) return;
@@ -1020,7 +1316,6 @@ function showCard(idx) {
   currentIdx = ((idx % activeCards.length) + activeCards.length) % activeCards.length;
   positionCards(false);
   animateCounter(currentIdx + 1, activeCards.length);
-  updateViewAllBtn();
 }
 
 prevBtn && prevBtn.addEventListener('click', () => showCard(currentIdx - 1));
@@ -1052,37 +1347,113 @@ document.querySelectorAll('.oracle-icon-btn').forEach(btn => {
 
     positionCards(true);
     animateCounter(1, activeCards.length);
-    updateViewAllBtn();
 
     if (carouselThemeLbl) carouselThemeLbl.textContent = label.toUpperCase();
     if (carouselSection) {
       carouselSection.style.backgroundColor = color;
       carouselSection.classList.add('active');
     }
-    if (fullGallery) fullGallery.classList.remove('open');
-    if (viewAllBtn) viewAllBtn.textContent = 'Explore Full Gallery';
 
-    setTimeout(() => carouselSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+    requestAnimationFrame(() => carouselSection.scrollIntoView({ behavior: 'smooth', block: 'start' }));
   });
 });
 
-// View All toggle — staggered entry animation
-if (viewAllBtn && fullGallery) {
-  viewAllBtn.addEventListener('click', () => {
-    const open = fullGallery.classList.toggle('open');
-    viewAllBtn.textContent = open ? 'Hide Gallery' : 'Explore Full Gallery';
-    if (open) {
+// Discover another feeling — scroll back to oracle
+const discoverBtn = document.getElementById('discover-btn');
+if (discoverBtn) {
+  discoverBtn.addEventListener('click', () => {
+    document.getElementById('oracle').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+// All Works CTA button → open gallery with staggered animation
+const allWorksBtn = document.getElementById('all-works-open-btn');
+if (allWorksBtn && fullGallery) {
+  allWorksBtn.addEventListener('click', () => {
+    if (!fullGallery.classList.contains('open')) {
       fullGallery.querySelectorAll('.fg-item').forEach((item, i) => {
         item.style.animationDelay = `${i * 38}ms`;
       });
-      setTimeout(() => fullGallery.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+      fullGallery.classList.add('open');
+      allWorksBtn.textContent = 'Hide Gallery';
     } else {
-      fullGallery.querySelectorAll('.fg-item').forEach(item => {
-        item.style.animationDelay = '';
-      });
+      fullGallery.classList.remove('open');
+      allWorksBtn.textContent = 'Discover the Collection';
+    }
+    if (fullGallery.classList.contains('open')) {
+      setTimeout(() => fullGallery.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
     }
   });
 }
+
+// ── SVG border animation on CTA button ───────────────────────
+if (allWorksBtn) {
+  onVisible(allWorksBtn, () => {
+    setTimeout(() => allWorksBtn.classList.add('border-drawn'), 200);
+  }, 0.5);
+}
+
+// ── Hamburger menu ────────────────────────────────────────────
+const hamburger = document.getElementById('nav-hamburger');
+const mobileMenu = document.getElementById('nav-mobile-menu');
+if (hamburger && mobileMenu) {
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    if (isOpen) {
+      mobileMenu.classList.add('open');
+      requestAnimationFrame(() => mobileMenu.classList.add('visible'));
+    } else {
+      mobileMenu.classList.remove('visible');
+      setTimeout(() => mobileMenu.classList.remove('open'), 400);
+    }
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('visible');
+      setTimeout(() => mobileMenu.classList.remove('open'), 400);
+    });
+  });
+}
+
+// ── Artwork lightbox ──────────────────────────────────────────
+const artworkModal = document.getElementById('artwork-modal');
+const modalImg     = document.getElementById('modal-img');
+const modalTitulo  = document.getElementById('modal-titulo');
+const modalMedium  = document.getElementById('modal-medium');
+const modalYear    = document.getElementById('modal-year');
+const modalDesc    = document.getElementById('modal-desc');
+const modalWaBtn   = document.getElementById('modal-wa-btn');
+
+function openArtworkModal(item) {
+  const img    = item.querySelector('img');
+  const titulo = item.dataset.titulo;
+  modalImg.src        = img.src;
+  modalImg.alt        = img.alt;
+  modalTitulo.textContent = titulo;
+  modalMedium.textContent = item.dataset.medium;
+  modalYear.textContent   = item.dataset.year;
+  modalDesc.textContent   = item.dataset.desc;
+  const msg = encodeURIComponent(`Hi Iza! I'm interested in your artwork "${titulo}". I'd love to know if it's still available.`);
+  modalWaBtn.href = `https://wa.me/31610291900?text=${msg}`;
+  artworkModal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeArtworkModal() {
+  artworkModal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+if (artworkModal) {
+  artworkModal.querySelector('.artwork-modal-backdrop').addEventListener('click', closeArtworkModal);
+  artworkModal.querySelector('.artwork-modal-close').addEventListener('click', closeArtworkModal);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeArtworkModal(); });
+}
+
+document.querySelectorAll('.fg-item').forEach(item => {
+  item.addEventListener('click', () => openArtworkModal(item));
+});
 
 // ── Bridge quote reveal ───────────────────────────────────────
 onVisible(document.getElementById('ws-bridge'), el => el.classList.add('bridge-in'), 0.3);
@@ -1105,6 +1476,9 @@ document.querySelectorAll('.ws-card').forEach((card, i) => {
   }, { threshold: 0.2 }).observe(card);
 });
 
+// ── Footer reveal ─────────────────────────────────────────────
+onVisible(document.querySelector('footer'), el => el.classList.add('footer-in'), 0.2);
+
 
 // ── Workshops: hero parallax ──────────────────────────────────
 (function() {
@@ -1123,6 +1497,147 @@ document.querySelectorAll('.ws-card').forEach((card, i) => {
 // ── Workshops: quote & CTA reveal ────────────────────────────
 onVisible(document.querySelector('.ws-quote-wrap'), el => el.classList.add('ws-quote-in'), 0.3);
 onVisible(document.querySelector('.ws-cta-block'), el => el.classList.add('ws-cta-in'), 0.2);
+
+// ── i18n ──────────────────────────────────────────────────────
+const TRANSLATIONS = {
+  en: {
+    'nav-explore':      'Explore',
+    'nav-workshops':    'Workshops',
+    'hero-sub':         'Endlessly creating',
+    'manifesto-1':      'For me, art is',
+    'manifesto-2':      'stopping time —',
+    'manifesto-3':      'a way to listen to nature,',
+    'manifesto-4':      'to <span class="frase-gold">magic</span>, to the quiet voice',
+    'manifesto-5':      'that lives inside.',
+    'about-desc':       'I believe art begins with intuition. Painting is my way of slowing down, reconnecting with nature and expressing what words often can\'t.',
+    'oracle-question':  'How are you feeling today?',
+    'oracle-sub':       'Choose the emotion that resonates with you and discover artworks inspired by that feeling.',
+    'oracle-sun':       'Sun',
+    'oracle-magic':     'Magic',
+    'oracle-nature':    'Nature',
+    'discover-btn':     '↑ Discover another feeling',
+    'all-works-label':  'Continue exploring.',
+    'all-works-heading':'Every painting begins<br>with a feeling.',
+    'all-works-sub':    'Acrylics, watercolors, mandalas and portraits — each piece born from a feeling, a moment, an impulse to create.',
+    'all-works-btn':    'Discover the Collection',
+    'gallery-title':    'All Works',
+    'modal-wa-btn':     'I\'m interested',
+    'bridge-1':         'Art is personal.',
+    'bridge-2':         'But it\'s even more powerful',
+    'bridge-3':         'when it\'s shared.',
+    'ws-hero-label':    'Painting Together',
+    'ws-heading-1':     'Creative',
+    'ws-heading-2':     'Experiences',
+    'ws-subhead':       'More than learning how to paint, these workshops create space to slow down, reconnect with yourself and enjoy making something with your own hands. Every session is different because every group brings its own energy.',
+    'ws-card-1-title':  'No experience needed',
+    'ws-card-1-desc':   'Come exactly as you are.',
+    'ws-card-2-title':  'Everything is provided',
+    'ws-card-2-desc':   'Just bring your curiosity.',
+    'ws-card-3-title':  'Hosted anywhere',
+    'ws-card-3-desc':   'Hostels · Cafés · Retreats · Creative Spaces',
+    'ws-note-1':        'No one knew each other at the beginning.',
+    'ws-note-2':        'Two hours later, everyone was smiling.',
+    'ws-note-3':        'No experience. Just curiosity.',
+    'ws-note-4':        'Every stroke tells something you didn\'t plan.',
+    'ws-note-5':        'The mess is part of it.',
+    'ws-quote':         'Art brings<br><span class="ws-quote-people">people</span> together.',
+    'ws-cta-h1':        'Interested in an artwork?',
+    'ws-cta-btn1':      'Ask about an artwork',
+    'ws-cta-h2':        'Want to host a workshop?',
+    'ws-cta-btn2':      'Let\'s create together',
+    'footer-tagline':   'Thank you for visiting my world.',
+  },
+  es: {
+    'nav-explore':      'Explorar',
+    'nav-workshops':    'Talleres',
+    'hero-sub':         'Creando sin parar',
+    'manifesto-1':      'Para mí, el arte es',
+    'manifesto-2':      'detener el tiempo —',
+    'manifesto-3':      'una forma de escuchar la naturaleza,',
+    'manifesto-4':      'a la <span class="frase-gold">magia</span>, a esa voz silenciosa',
+    'manifesto-5':      'que vive dentro.',
+    'about-desc':       'Creo que el arte comienza con la intuición. Pintar es mi forma de desacelerar, reconectarme con la naturaleza y expresar lo que las palabras a veces no pueden.',
+    'oracle-question':  '¿Cómo te sientes hoy?',
+    'oracle-sub':       'Elige la emoción que más resuena contigo y descubre obras inspiradas en ese sentimiento.',
+    'oracle-sun':       'Sol',
+    'oracle-magic':     'Magia',
+    'oracle-nature':    'Naturaleza',
+    'discover-btn':     '↑ Descubre otro sentimiento',
+    'all-works-label':  'Sigue explorando.',
+    'all-works-heading':'Cada pintura comienza<br>con un sentimiento.',
+    'all-works-sub':    'Acrílicos, acuarelas, mandalas y retratos — cada obra nace de un sentimiento, un momento, un impulso de crear.',
+    'all-works-btn':    'Descubre la Colección',
+    'gallery-title':    'Todas las Obras',
+    'modal-wa-btn':     'Me interesa',
+    'bridge-1':         'El arte es personal.',
+    'bridge-2':         'Pero es aún más poderoso',
+    'bridge-3':         'cuando se comparte.',
+    'ws-hero-label':    'Pintando Juntos',
+    'ws-heading-1':     'Experiencias',
+    'ws-heading-2':     'Creativas',
+    'ws-subhead':       'Más que aprender a pintar, estos talleres crean un espacio para desacelerar, reconectarte contigo mismo y disfrutar de hacer algo con tus propias manos. Cada sesión es diferente porque cada grupo trae su propia energía.',
+    'ws-card-1-title':  'Sin experiencia previa',
+    'ws-card-1-desc':   'Ven exactamente como eres.',
+    'ws-card-2-title':  'Todo está incluido',
+    'ws-card-2-desc':   'Solo trae tu curiosidad.',
+    'ws-card-3-title':  'En cualquier lugar',
+    'ws-card-3-desc':   'Hostels · Cafés · Retiros · Espacios Creativos',
+    'ws-note-1':        'Al principio nadie se conocía.',
+    'ws-note-2':        'Dos horas después, todos sonreían.',
+    'ws-note-3':        'Sin experiencia. Solo curiosidad.',
+    'ws-note-4':        'Cada trazo cuenta algo que no planeaste.',
+    'ws-note-5':        'El desorden es parte de todo.',
+    'ws-quote':         'El arte une<br>a las <span class="ws-quote-people">personas</span>.',
+    'ws-cta-h1':        '¿Te interesa una obra?',
+    'ws-cta-btn1':      'Pregunta por una obra',
+    'ws-cta-h2':        '¿Quieres organizar un taller?',
+    'ws-cta-btn2':      'Creemos juntos',
+    'footer-tagline':   'Gracias por visitar mi mundo.',
+  }
+};
+
+let currentLang = localStorage.getItem('iza-lang') || 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('iza-lang', lang);
+  const t = TRANSLATIONS[lang];
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+
+  // Update oracle button data-label for carousel theme label
+  document.querySelectorAll('.oracle-icon-btn').forEach(btn => {
+    btn.dataset.label = lang === 'es' ? btn.dataset.labelEs : btn.dataset.label.replace(btn.dataset.labelEs || '', '') || btn.querySelector('.oracle-label').textContent;
+  });
+
+  // Update WhatsApp hrefs for CTA buttons
+  const waArtwork = lang === 'es'
+    ? 'https://wa.me/31610291900?text=Hola%20Iza!%20Vi%20tu%20trabajo%20y%20una%20de%20tus%20pinturas%20me%20llegó%20al%20alma.%20Me%20gustaría%20saber%20más.'
+    : 'https://wa.me/31610291900?text=Hi%20Iza!%20I%20came%20across%20your%20work%20and%20one%20of%20your%20paintings%20really%20resonated%20with%20me.%20I%27d%20love%20to%20know%20more%20about%20it.';
+  const waWorkshop = lang === 'es'
+    ? 'https://wa.me/31610291900?text=Hola%20Iza!%20Me%20interesa%20organizar%20un%20taller%20de%20pintura.%20Me%20encantaría%20crear%20algo%20especial%20para%20mi%20comunidad.'
+    : 'https://wa.me/31610291900?text=Hi%20Iza!%20I%27m%20interested%20in%20hosting%20a%20painting%20workshop.%20I%27d%20love%20to%20create%20something%20special%20for%20my%20community.';
+  const b1 = document.getElementById('ws-cta-btn1');
+  const b2 = document.getElementById('ws-cta-btn2');
+  if (b1) b1.href = waArtwork;
+  if (b2) b2.href = waWorkshop;
+
+  // Update toggle buttons label (show the OTHER language)
+  const nextLang = lang === 'en' ? 'ES' : 'EN';
+  document.querySelectorAll('.lang-toggle').forEach(b => b.textContent = nextLang);
+}
+
+// Init
+setLang(currentLang);
+
+// Toggle handlers
+document.querySelectorAll('.lang-toggle').forEach(btn => {
+  btn.addEventListener('click', () => setLang(currentLang === 'en' ? 'es' : 'en'));
+});
 </script>
 </body>
 </html>
