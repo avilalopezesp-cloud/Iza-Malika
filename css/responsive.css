@@ -1,0 +1,32 @@
+@media (max-width: 700px) {
+  .hero-image-wrap { width: min(78vw, 50vh); }
+  #hero-sticky { justify-content: center; padding-top: 0; }
+  .hero-center { margin-top: 1.4rem; }
+  #about { grid-template-columns: 1fr; gap: 2.5rem; padding: 4rem 6vw; }
+}
+
+@media (max-width: 640px) {
+  nav { padding: 1.4rem 1.5rem; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .oracle-icons { gap: 1rem; }
+  .oracle-icon-btn { padding: 1.6rem 1.8rem; }
+  #oracle { padding: 6rem 5vw 5rem; }
+  #oracle.expanded .oracle-intuition { letter-spacing: 0.22em; }
+  .ws-cards { grid-template-columns: 1fr; gap: 0.8rem; }
+  .ws-inner { padding: 4rem 5vw 0; }
+  .ws-cards { margin-bottom: 4rem; }
+  .ws-editorial { margin-bottom: 4rem; }
+  .ws-hero { height: 70vh; }
+  .ws-editorial { grid-template-columns: 1fr; }
+  .ws-pic-b { grid-column:1; grid-row:auto; height: clamp(300px,75vw,480px); }
+  .ws-pic-c, .ws-pic-d { grid-column:1; grid-row:auto; height: clamp(240px,60vw,360px); }
+  #all-works-cta { padding: 3.5rem 5vw 3.5rem; }
+  .ws-cta-block { padding: 0 4vw 5rem; }
+}
+
+@media (max-width: 600px) {
+  .artwork-modal-inner { flex-direction: column; gap: 1.5rem; padding: 2rem 1.5rem; }
+  .modal-img-wrap { width: 100%; }
+  .ws-cta-rows { flex-direction: column; gap: 1.2rem; padding: 2rem 0; }
+}

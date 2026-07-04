@@ -1,0 +1,89 @@
+/* ═══ KEYFRAMES ═══ */
+@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+@keyframes hintPulse { 0%,100%{opacity:.4;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.2)} }
+@keyframes fgFadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fgItemIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+
+/* ═══ MANIFESTO ═══ */
+.frase-inner.visible .frase-linea-inner { transform: translateY(0); }
+.frase-linea:nth-child(1) .frase-linea-inner { transition-delay: 0.00s; }
+.frase-linea:nth-child(2) .frase-linea-inner { transition-delay: 0.13s; }
+.frase-linea:nth-child(3) .frase-linea-inner { transition-delay: 0.26s; }
+.frase-linea:nth-child(4) .frase-linea-inner { transition-delay: 0.39s; }
+.frase-linea:nth-child(5) .frase-linea-inner { transition-delay: 0.52s; }
+
+/* ═══ ABOUT ═══ */
+.about-img-wrap.visible { opacity: 1; transform: translateX(0); }
+.about-text.visible { opacity: 1; transform: translateX(0); }
+
+/* ═══ ORACLE ═══ */
+#oracle.visible .oracle-intuition { opacity: 1; transform: translateY(0); }
+#oracle.expanded .oracle-intuition { letter-spacing: 0.55em; }
+#oracle.visible .oracle-question { opacity: 1; transform: translateY(0); }
+#oracle.visible .oracle-sub { opacity: 1; transform: translateY(0); }
+#oracle.expanded .oracle-icons { opacity: 1; transform: scale(1) translateY(0); }
+
+/* ═══ CAROUSEL ═══ */
+.carousel-card[data-active] .carousel-img-wrap img { transform: scale(1); }
+.carousel-card[data-active] .carousel-meta { opacity: 1; transition: opacity 0.45s ease 0.3s; }
+
+/* ═══ ALL-WORKS CTA ═══ */
+#all-works-cta.aw-in .all-works-label {
+  opacity: 1; transform: translateY(0);
+}
+#all-works-cta.aw-in .all-works-heading {
+  opacity: 1; transform: translateY(0);
+}
+#all-works-cta.aw-in .all-works-sub {
+  opacity: 1; transform: translateY(0); transition-delay: 0.45s;
+}
+#all-works-cta.aw-in .all-works-open-btn {
+  opacity: 1; transition-delay: 0.65s;
+}
+
+/* ═══ GALLERY ═══ */
+#full-gallery.revealed .full-gallery-title {
+  animation: fgFadeUp 0.5s ease forwards;
+}
+#full-gallery.open .fg-item {
+  animation: fgItemIn 0.55s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+
+/* ═══ LIGHTBOX ═══ */
+.artwork-modal.open { opacity: 1; pointer-events: auto; }
+.artwork-modal.open .artwork-modal-inner { transform: translateY(0); }
+
+/* ═══ BRIDGE ═══ */
+#ws-bridge.bridge-in .bridge-line-inner { transform: translateY(0); }
+
+/* ═══ WORKSHOP TEXT ═══ */
+#workshops.ws-text-in .ws-heading-line span { transform: translateY(0); }
+#workshops.ws-text-in .ws-subhead { opacity: 1; transform: translateY(0); }
+
+/* ═══ WORKSHOP CARDS ═══ */
+.ws-card.ws-card-in { opacity: 1; transform: translateY(0); }
+.ws-card.ws-card-in .ws-card-dot circle { stroke-dashoffset: 0; }
+.ws-card.ws-card-in .ws-card-title { opacity: 1; transform: translateY(0); }
+.ws-card.ws-card-in .ws-card-desc { opacity: 1; transform: translateY(0); }
+
+/* ═══ WORKSHOP EDITORIAL ═══ */
+.ws-pic.ws-revealed .ws-note { opacity: 1; transform: translateY(0); }
+
+/* ═══ WORKSHOP QUOTE ═══ */
+.ws-quote-wrap.ws-quote-in { opacity: 1; transform: translateY(0); }
+.ws-quote-wrap.ws-quote-in .ws-quote-people { color: var(--rose); }
+
+/* ═══ WORKSHOP CTA ═══ */
+.ws-cta-block.ws-cta-in { opacity: 1; transform: translateY(0); }
+.ws-cta-row:hover::after { width: 100%; }
+.ws-cta-row:hover .ws-cta-btn {
+  background: var(--ink); color: var(--cream); border-color: var(--ink);
+}
+
+/* ═══ FOOTER ═══ */
+footer.footer-in { opacity: 1; transform: translateY(0); }
