@@ -1,0 +1,152 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "$metadata": {
+    "project": "Iza Malika",
+    "version": "1.0",
+    "extracted": "2026-07",
+    "source": "css/style.css, css/components.css, css/animations.css"
+  },
+
+  "color": {
+    "cream":  { "$value": "#F5EDE0", "$type": "color", "$description": "Default background. Never replace with pure white." },
+    "ink":    { "$value": "#2A2018", "$type": "color", "$description": "Primary text and UI elements. Replaces black." },
+    "rose":   { "$value": "#C4687A", "$type": "color", "$description": "Emotional accent. Taglines, highlights, hover states." },
+    "gold":   { "$value": "#C9A84C", "$type": "color", "$description": "Premium detail. Borders, active states, dividers." },
+    "green":  { "$value": "#4A7C59", "$type": "color", "$description": "Nature accent. Progress bar gradient endpoint." },
+    "night":  { "$value": "#1C1C2E", "$type": "color", "$description": "Deep dark background. Overlays." },
+
+    "overlay": {
+      "ink-85":  { "$value": "rgba(42,32,24,0.85)", "$type": "color", "$description": "Lightbox backdrop blur overlay" },
+      "ink-08":  { "$value": "rgba(42,32,24,0.08)", "$type": "color", "$description": "Hover shadow color" },
+      "ink-06":  { "$value": "rgba(42,32,24,0.06)", "$type": "color", "$description": "Card hover shadow" },
+      "ink-05":  { "$value": "rgba(42,32,24,0.05)", "$type": "color", "$description": "Subtle hover background" },
+      "ink-03":  { "$value": "rgba(42,32,24,0.03)", "$type": "color", "$description": "CTA card base background" },
+      "ink-02":  { "$value": "rgba(42,32,24,0.02)", "$type": "color", "$description": "Feature card base background" },
+      "cream-60":{ "$value": "rgba(245,237,224,0.6)",  "$type": "color", "$description": "Oracle subtitle on dark" },
+      "cream-65":{ "$value": "rgba(245,237,224,0.65)", "$type": "color", "$description": "About desc text" }
+    },
+
+    "carousel-themes": {
+      "sun":     { "$value": "#EDE8E0", "$type": "color", "$description": "Sun oracle carousel background" },
+      "magic":   { "$value": "#EAE5F0", "$type": "color", "$description": "Magic oracle carousel background" },
+      "nature":  { "$value": "#E2EBE2", "$type": "color", "$description": "Nature oracle carousel background" }
+    }
+  },
+
+  "typography": {
+    "fontFamily": {
+      "primary": { "$value": "'Cormorant Garamond', serif", "$type": "fontFamily", "$description": "Only typeface used across the entire site" }
+    },
+    "fontWeight": {
+      "light":   { "$value": 300, "$type": "fontWeight", "$description": "Default weight. Used for all headings and body." },
+      "regular": { "$value": 400, "$type": "fontWeight", "$description": "Used sparingly for emphasis within body copy." }
+    },
+    "fontSize": {
+      "display":    { "$value": "clamp(3rem, 8vw, 6.5rem)",    "$type": "dimension", "$description": "Hero name: Iza Malika" },
+      "heading-xl": { "$value": "clamp(2.4rem, 6.5vw, 5rem)",  "$type": "dimension", "$description": "Section title: Creative Experiences" },
+      "heading-lg": { "$value": "clamp(2.2rem, 5.5vw, 3.8rem)","$type": "dimension", "$description": "Oracle question" },
+      "heading-md": { "$value": "clamp(1.8rem, 4vw, 3rem)",    "$type": "dimension", "$description": "Portfolio CTA heading" },
+      "heading-sm": { "$value": "clamp(1.3rem, 2.8vw, 2rem)",  "$type": "dimension", "$description": "CTA card heading" },
+      "body-lg":    { "$value": "clamp(1rem, 1.8vw, 1.3rem)",  "$type": "dimension", "$description": "About description" },
+      "body-md":    { "$value": "clamp(1rem, 2vw, 1.2rem)",    "$type": "dimension", "$description": "Workshop subhead" },
+      "body-sm":    { "$value": "clamp(0.9rem, 1.6vw, 1.1rem)","$type": "dimension", "$description": "Portfolio sub text" },
+      "caption":    { "$value": "0.88rem",                      "$type": "dimension", "$description": "Card descriptions" },
+      "label":      { "$value": "0.75rem",                      "$type": "dimension", "$description": "Oracle labels, carousel counter" },
+      "micro":      { "$value": "0.72rem",                      "$type": "dimension", "$description": "Section eyebrows, footer copy" }
+    },
+    "lineHeight": {
+      "tight":   { "$value": 1.0,  "$type": "number", "$description": "Hero name" },
+      "heading": { "$value": 1.2,  "$type": "number", "$description": "Section titles" },
+      "body":    { "$value": 1.75, "$type": "number", "$description": "Body text" },
+      "relaxed": { "$value": 1.85, "$type": "number", "$description": "Workshop subhead" }
+    },
+    "letterSpacing": {
+      "tight":    { "$value": "0.03em",  "$type": "dimension", "$description": "Manifesto, bridge lines" },
+      "default":  { "$value": "0.04em",  "$type": "dimension", "$description": "Most headings" },
+      "nav":      { "$value": "0.08em",  "$type": "dimension", "$description": "Navigation links" },
+      "heading":  { "$value": "0.12em",  "$type": "dimension", "$description": "Hero name, about name" },
+      "label":    { "$value": "0.35em",  "$type": "dimension", "$description": "Buttons, labels" },
+      "caption":  { "$value": "0.38em",  "$type": "dimension", "$description": "Button letter spacing" },
+      "eyebrow":  { "$value": "0.45em",  "$type": "dimension", "$description": "Section eyebrows, oracle labels" },
+      "wide":     { "$value": "0.5em",   "$type": "dimension", "$description": "Carousel theme label" }
+    }
+  },
+
+  "spacing": {
+    "section-y-sm":  { "$value": "4rem",  "$type": "dimension", "$description": "Tight section padding (mobile)" },
+    "section-y-md":  { "$value": "6rem",  "$type": "dimension", "$description": "Default section padding" },
+    "section-y-lg":  { "$value": "8rem",  "$type": "dimension", "$description": "Generous section padding" },
+    "section-y-xl":  { "$value": "9rem",  "$type": "dimension", "$description": "Oracle section top padding" },
+    "section-x":     { "$value": "6vw",   "$type": "dimension", "$description": "Default horizontal padding" },
+    "section-x-sm":  { "$value": "5vw",   "$type": "dimension", "$description": "Mobile horizontal padding" },
+    "nav-x":         { "$value": "3rem",  "$type": "dimension", "$description": "Nav horizontal padding" },
+    "nav-y":         { "$value": "2rem",  "$type": "dimension", "$description": "Nav vertical padding" },
+    "card-pad-x":    { "$value": "1.8rem","$type": "dimension", "$description": "Feature card horizontal padding" },
+    "card-pad-y":    { "$value": "2rem",  "$type": "dimension", "$description": "Feature card vertical padding" },
+    "btn-pad-x":     { "$value": "2.8rem","$type": "dimension", "$description": "Primary button horizontal padding" },
+    "btn-pad-y":     { "$value": "1rem",  "$type": "dimension", "$description": "Primary button vertical padding" },
+    "grid-gap":      { "$value": "1rem",  "$type": "dimension", "$description": "Gallery grid gap" },
+    "grid-gap-cards":{ "$value": "1.2rem","$type": "dimension", "$description": "Feature cards grid gap" }
+  },
+
+  "borderRadius": {
+    "none":   { "$value": "0",    "$type": "dimension", "$description": "All cards, buttons — no rounding" },
+    "circle": { "$value": "50%",  "$type": "dimension", "$description": "Cursor dot, carousel arrows" }
+  },
+
+  "shadow": {
+    "card-hover": { "$value": "0 8px 32px rgba(42,32,24,0.06)",  "$type": "shadow", "$description": "Feature card hover" },
+    "cta-hover":  { "$value": "0 12px 40px rgba(42,32,24,0.08)", "$type": "shadow", "$description": "CTA card hover" }
+  },
+
+  "border": {
+    "light":  { "$value": "1px solid rgba(42,32,24,0.09)",  "$type": "border", "$description": "Feature card default border" },
+    "medium": { "$value": "1px solid rgba(42,32,24,0.22)",  "$type": "border", "$description": "Buttons, lang toggle" },
+    "strong": { "$value": "1px solid rgba(42,32,24,0.28)",  "$type": "border", "$description": "CTA buttons" },
+    "divider":{ "$value": "1px solid rgba(42,32,24,0.12)",  "$type": "border", "$description": "CTA divider lines" },
+    "section":{ "$value": "1px solid rgba(42,32,24,0.07)",  "$type": "border", "$description": "Between portfolio and gallery" },
+    "footer": { "$value": "1px solid rgba(245,237,224,0.08)","$type": "border", "$description": "Footer internal divider" }
+  },
+
+  "animation": {
+    "easing": {
+      "spring":   { "$value": "cubic-bezier(0.16, 1, 0.3, 1)", "$type": "cubicBezier", "$description": "Primary spring easing — smooth deceleration" },
+      "standard": { "$value": "cubic-bezier(0.25, 1, 0.5, 1)",  "$type": "cubicBezier", "$description": "Carousel card movement" },
+      "ease":     { "$value": "ease",                             "$type": "cubicBezier", "$description": "Simple fade animations" }
+    },
+    "duration": {
+      "instant":  { "$value": "0.2s",  "$type": "duration", "$description": "Hover feedback (opacity, color)" },
+      "quick":    { "$value": "0.35s", "$type": "duration", "$description": "Button hover, arrow hover" },
+      "normal":   { "$value": "0.45s", "$type": "duration", "$description": "Modal open, carousel meta" },
+      "medium":   { "$value": "0.6s",  "$type": "duration", "$description": "Discover button, ws-card desc" },
+      "standard": { "$value": "0.85s", "$type": "duration", "$description": "Carousel card movement" },
+      "slow":     { "$value": "1.1s",  "$type": "duration", "$description": "Manifesto reveal, ws subhead" },
+      "slower":   { "$value": "1.3s",  "$type": "duration", "$description": "About section, border drawing" },
+      "dramatic": { "$value": "1.6s",  "$type": "duration", "$description": "Hero name entrance" }
+    },
+    "delay": {
+      "none":     { "$value": "0s",    "$type": "duration" },
+      "short":    { "$value": "0.15s", "$type": "duration" },
+      "medium":   { "$value": "0.3s",  "$type": "duration" },
+      "long":     { "$value": "0.5s",  "$type": "duration" },
+      "longer":   { "$value": "0.65s", "$type": "duration" },
+      "hero":     { "$value": "0.9s",  "$type": "duration", "$description": "Hero sub-title delay" },
+      "hint":     { "$value": "1.4s",  "$type": "duration", "$description": "Scroll hint delay" }
+    }
+  },
+
+  "breakpoint": {
+    "mobile":       { "$value": "640px",  "$type": "dimension", "$description": "Main mobile breakpoint" },
+    "mobile-wide":  { "$value": "700px",  "$type": "dimension", "$description": "Hero + About breakpoint" },
+    "modal-mobile": { "$value": "600px",  "$type": "dimension", "$description": "Lightbox + CTA rows breakpoint" }
+  },
+
+  "z-index": {
+    "cursor":    { "$value": 9999, "$type": "number" },
+    "progress":  { "$value": 9998, "$type": "number" },
+    "lightbox":  { "$value": 2000, "$type": "number" },
+    "mobile-menu":{ "$value": 550, "$type": "number" },
+    "hamburger": { "$value": 600, "$type": "number" },
+    "nav":       { "$value": 500, "$type": "number" }
+  }
+}
