@@ -163,7 +163,7 @@ Update both `en` and `es` values.
 
 - Manifesto quote (lines in `#manifesto` section)
 - About section bio text
-- Artwork titles and descriptions (in `data-titulo`, `data-desc` attributes on `.fg-item`)
+- Artwork titles and descriptions (in `content/obras.json`)
 - Footer name, copyright, credits
 
 ---
@@ -186,30 +186,22 @@ silueta-hojas.jpg    botanica.jpg         cuerpo-flores.jpg
 bailarina-verde.jpg  retrato-femenino.jpg
 ```
 
-### To add a new artwork
+### To add, edit or reorder artworks
 
-1. Add the image file to `images/obras/`
-2. Add a carousel card in `index.html` (copy an existing one):
-```html
-<div class="carousel-card" data-tema="sol">
-  <div class="carousel-img-wrap">
-    <img src="images/obras/YOUR-FILE.jpg" alt="Artwork Title" loading="lazy" />
-  </div>
-  <div class="carousel-meta">
-    <p class="carousel-titulo">Artwork Title</p>
-    <p class="carousel-subtitulo">Acrylic · 50×40 cm</p>
-  </div>
-</div>
-```
-3. Add a gallery item in `index.html` (copy an existing one):
-```html
-<div class="fg-item"
-  data-titulo="Artwork Title"
-  data-medium="Acrylic on canvas"
-  data-year="2025"
-  data-desc="Description of the piece...">
-  <img src="images/obras/YOUR-FILE.jpg" alt="Artwork Title" loading="lazy" />
-</div>
+Artworks live in **`content/obras.json`** — the carousel and the "All Works" grid are built from it by `js/artworks.js`.
+
+**Easiest way (no code):** open [app.pagescms.org](https://app.pagescms.org), sign in with GitHub, open this repo → **Obras**. Each artwork has a title, photo, technique, year, description and an optional oracle emotion (Sol / Magia / Naturaleza; empty = only in "All Works"). Save, and the live site updates in 1–2 minutes. The editor is configured in `.pages.yml`.
+
+**By hand:** add an entry to `content/obras.json`:
+```json
+{
+  "titulo": "Artwork Title",
+  "foto": "images/obras/YOUR-FILE.jpg",
+  "tecnica": "Acrylic · 50×40 cm",
+  "anio": "2025",
+  "descripcion": "Description of the piece...",
+  "emocion": "sol"
+}
 ```
 
 ### Portrait photo (`images/iza.jpg`)

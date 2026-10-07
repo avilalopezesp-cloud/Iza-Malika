@@ -1,0 +1,140 @@
+{
+  "obras": [
+    {
+      "titulo": "The Sun and the Mountain",
+      "foto": "images/obras/sol-montana.jpg",
+      "tecnica": "Acrylic · 50×40 cm",
+      "anio": "2024",
+      "descripcion": "Where light meets stone, the sun finds its throne. A piece about warmth, permanence and the power of rising.",
+      "emocion": "sol"
+    },
+    {
+      "titulo": "Solar Mandala",
+      "foto": "images/obras/mandala-sol.jpg",
+      "tecnica": "Acrylic · 30×40 cm",
+      "anio": "2024",
+      "descripcion": "Sacred geometry bathed in golden light. Each ring a reminder that everything begins and ends at the center.",
+      "emocion": "sol"
+    },
+    {
+      "titulo": "Golden Flower",
+      "foto": "images/obras/flor-dorada.jpg",
+      "tecnica": "Acrylic on canvas",
+      "anio": "2024",
+      "descripcion": "A bloom that carries the warmth of summer within. Painted during a season of renewal and quiet joy.",
+      "emocion": "sol"
+    },
+    {
+      "titulo": "White Mandala",
+      "foto": "images/obras/mandala-blanca.jpg",
+      "tecnica": "Acrylic · 30×40 cm",
+      "anio": "2023",
+      "descripcion": "Pure patterns woven in silence and light. A meditation on simplicity and the beauty of empty space.",
+      "emocion": "sol"
+    },
+    {
+      "titulo": "Flamenco",
+      "foto": "images/obras/flamenco.jpg",
+      "tecnica": "Acrylic on canvas",
+      "anio": "2024",
+      "descripcion": "The fire in movement, the soul in color. An ode to the passion that lives in every step, every turn.",
+      "emocion": "sol"
+    },
+    {
+      "titulo": "The Mystic Moon",
+      "foto": "images/obras/luna-mistica.jpg",
+      "tecnica": "Acrylic · 40×50 cm",
+      "anio": "2024",
+      "descripcion": "She watches over what the sun cannot see. A tribute to the quiet magic of nighttime and inner knowing.",
+      "emocion": "magia"
+    },
+    {
+      "titulo": "Purple Mandala",
+      "foto": "images/obras/mandala-purpura.jpg",
+      "tecnica": "Acrylic on canvas",
+      "anio": "2024",
+      "descripcion": "Where violet dreams spiral into infinity. A portal of color and intention, painted in a single breath.",
+      "emocion": "magia"
+    },
+    {
+      "titulo": "Woman in the Wind",
+      "foto": "images/obras/mujer-viento.jpg",
+      "tecnica": "Acrylic on paper",
+      "anio": "2025",
+      "descripcion": "She lets go of everything that no longer serves her. Hair as wings, spirit as sky. A celebration of release.",
+      "emocion": "magia"
+    },
+    {
+      "titulo": "Lavender Mandala",
+      "foto": "images/obras/mandala-lavanda.jpg",
+      "tecnica": "Acrylic on canvas",
+      "anio": "2023",
+      "descripcion": "Soft and deliberate, like a whispered intention. A piece that asks you to slow down and breathe.",
+      "emocion": "magia"
+    },
+    {
+      "titulo": "Moon Woman",
+      "foto": "images/obras/luna-mujer.jpg",
+      "tecnica": "Acrylic on canvas",
+      "anio": "2024",
+      "descripcion": "Her cycles are the moon's, her power, her own. A portrait of feminine energy in its fullest, truest form.",
+      "emocion": "magia"
+    },
+    {
+      "titulo": "Watercolor Goddess",
+      "foto": "images/obras/diosa-acuarela.jpg",
+      "tecnica": "Watercolor on paper",
+      "anio": "2024",
+      "descripcion": "A goddess born of color and impermanence. She dissolves at the edges, reminding us that beauty doesn't need borders.",
+      "emocion": "magia"
+    },
+    {
+      "titulo": "Green Plants",
+      "foto": "images/obras/plantas-verdes.jpg",
+      "tecnica": "Acrylic on canvas",
+      "anio": "2025",
+      "descripcion": "Life reaching upward, quietly and with certainty. A piece about growth, patience and the intelligence of nature.",
+      "emocion": "naturaleza"
+    },
+    {
+      "titulo": "Silhouette & Leaves",
+      "foto": "images/obras/silueta-hojas.jpg",
+      "tecnica": "Acrylic · 50×60 cm",
+      "anio": "2024",
+      "descripcion": "The body and the forest, one and the same. Where human form meets wild green, there is no separation.",
+      "emocion": "naturaleza"
+    },
+    {
+      "titulo": "Botanica",
+      "foto": "images/obras/botanica.jpg",
+      "tecnica": "Acrylic on canvas",
+      "anio": "2024",
+      "descripcion": "Nature drawn from memory and wonder. A botanical study that became something more — something felt, not just observed.",
+      "emocion": "naturaleza"
+    },
+    {
+      "titulo": "Body in Bloom",
+      "foto": "images/obras/cuerpo-flores.jpg",
+      "tecnica": "Acrylic · 50×40 cm",
+      "anio": "2025",
+      "descripcion": "When the body becomes a garden. A celebration of softness, color and the courage to grow in full view.",
+      "emocion": "naturaleza"
+    },
+    {
+      "titulo": "Green Dancer",
+      "foto": "images/obras/bailarina-verde.jpg",
+      "tecnica": "Acrylic on canvas",
+      "anio": "2024",
+      "descripcion": "Movement as meditation, color as breath. She dances not to be seen, but to feel alive.",
+      "emocion": "naturaleza"
+    },
+    {
+      "titulo": "Female Portrait",
+      "foto": "images/obras/retrato-femenino.jpg",
+      "tecnica": "Acrylic on canvas",
+      "anio": "2024",
+      "descripcion": "The quiet power in a gaze. A portrait that asks to be looked at slowly, and with patience.",
+      "emocion": ""
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+# Configuración del panel de edición (Pages CMS — https://app.pagescms.org)
+# Define qué puede editar Iza sin tocar código.
+
+media:
+  input: images/obras
+  output: images/obras
+  categories: [image]
+  extensions: [jpg, jpeg, png, webp]
+  rename: safe
+
+content:
+  - name: obras
+    label: Obras
+    description: Las obras que aparecen en la web. Arrastra para cambiar el orden.
+    type: file
+    path: content/obras.json
+    format: json
+    fields:
+      - name: obras
+        label: Obras
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{titulo}"
+        fields:
+          - name: titulo
+            label: Título
+            type: string
+            required: true
+          - name: foto
+            label: Foto
+            description: JPG, PNG o WEBP. Mejor que no pese más de 1 MB.
+            type: image
+            required: true
+          - name: tecnica
+            label: Técnica y medidas
+            description: "Por ejemplo: Acrylic · 50×40 cm"
+            type: string
+          - name: anio
+            label: Año
+            type: string
+          - name: descripcion
+            label: Descripción
+            description: El texto que se ve al abrir la obra.
+            type: text
+          - name: emocion
+            label: Emoción del oráculo
+            description: Elige una para que salga en el carrusel de esa emoción. Déjalo vacío para que salga solo en "All Works".
+            type: select
+            options:
+              values:
+                - value: sol
+                  label: ☀️ Sol
+                - value: magia
+                  label: 🔮 Magia
+                - value: naturaleza
+                  label: 🌿 Naturaleza
