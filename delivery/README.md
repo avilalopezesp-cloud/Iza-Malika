@@ -192,6 +192,8 @@ Artworks live in **`content/obras.json`** — the carousel and the "All Works" g
 
 **Easiest way (no code):** open [app.pagescms.org](https://app.pagescms.org), sign in with GitHub, open this repo → **Obras**. Each artwork has a title, photo, technique, year, description and an optional oracle emotion (Sol / Magia / Naturaleza; empty = only in "All Works"). Save, and the live site updates in 1–2 minutes. The editor is configured in `.pages.yml`.
 
+Photos can be uploaded straight from the phone: the **Optimizar imágenes** GitHub Action (`.github/workflows/optimize-images.yml`) automatically resizes any artwork over 700 KB to max 1600 px and fixes its rotation, a minute after it is uploaded.
+
 **By hand:** add an entry to `content/obras.json`:
 ```json
 {
