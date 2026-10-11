@@ -30,7 +30,7 @@ content:
             required: true
           - name: foto
             label: Foto
-            description: JPG, PNG o WEBP. Mejor que no pese más de 1 MB.
+            description: JPG, PNG o WEBP. Puedes subirla tal cual sale del móvil, la web la optimiza sola.
             type: image
             required: true
           - name: tecnica
