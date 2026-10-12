@@ -192,7 +192,11 @@ Artworks live in **`content/obras.json`** — the carousel and the "All Works" g
 
 **Easiest way (no code):** open [app.pagescms.org](https://app.pagescms.org), sign in with GitHub, open this repo → **Obras**. Each artwork has a title, photo, technique, year, description and an optional oracle emotion (Sol / Magia / Naturaleza; empty = only in "All Works"). Save, and the live site updates in 1–2 minutes. The editor is configured in `.pages.yml`.
 
-Photos can be uploaded straight from the phone: the **Optimizar imágenes** GitHub Action (`.github/workflows/optimize-images.yml`) automatically resizes any artwork over 700 KB to max 1600 px and fixes its rotation, a minute after it is uploaded.
+**Simplest way from a phone:** open `subir.html` on the live site (e.g. `https://avilalopezesp-cloud.github.io/Iza-Malika/subir.html`). It shrinks the photo in the browser (max 1600 px, JPEG) before uploading, so phone photos never hit Pages CMS's upload size limit (error 413), and adds the new artwork at the top of `content/obras.json`. The first time, it asks for a fine-grained GitHub token limited to this repo with *Contents: Read and write*; the token is stored only in that phone's browser.
+
+Pages CMS uploads larger than ~3 MB fail with error 413.
+
+As a safety net for photos uploaded other ways: the **Optimizar imágenes** GitHub Action (`.github/workflows/optimize-images.yml`) automatically resizes any artwork over 700 KB to max 1600 px and fixes its rotation, a minute after it is uploaded.
 
 **By hand:** add an entry to `content/obras.json`:
 ```json

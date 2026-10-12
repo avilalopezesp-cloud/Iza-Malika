@@ -30,7 +30,7 @@ content:
             required: true
           - name: foto
             label: Foto
-            description: JPG, PNG o WEBP. Puedes subirla tal cual sale del móvil, la web la optimiza sola.
+            description: "JPG, PNG o WEBP de menos de 3 MB. Si sale el error 413, la foto es muy grande: redúcela antes o usa la página subir.html, que la reduce sola."
             type: image
             required: true
           - name: tecnica

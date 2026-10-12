@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Subir obra · Iza Malika</title>
+  <link rel="icon" type="image/png" sizes="64x64" href="images/favicon.png" />
+  <link rel="apple-touch-icon" href="images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #F5EDE0;
+      --rose:  #C4687A;
+      --gold:  #C9A84C;
+      --green: #4A7C59;
+      --ink:   #2A2018;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.15rem;
+      line-height: 1.4;
+    }
+    main { max-width: 520px; margin: 0 auto; padding: 32px 16px 64px; }
+    h1 { font-weight: 300; font-size: 2.4rem; margin: 0 0 4px; }
+    .sub { font-style: italic; margin: 0 0 28px; opacity: .75; }
+    label { display: block; margin: 18px 0 6px; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; }
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      font: inherit;
+      font-size: 16px; /* evita el zoom automático en iPhone */
+      color: var(--ink);
+      background: #fffaf2;
+      border: 1px solid rgba(42, 32, 24, .25);
+      border-radius: 8px;
+    }
+    textarea { min-height: 110px; resize: vertical; }
+    .foto {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 180px; padding: 12px;
+      border: 1.5px dashed rgba(42, 32, 24, .35); border-radius: 12px;
+      background: #fffaf2; text-align: center; cursor: pointer;
+      margin: 0; font-size: 1.1rem; letter-spacing: normal; text-transform: none;
+    }
+    .foto img { max-width: 100%; max-height: 320px; border-radius: 6px; }
+    .foto input { display: none; }
+    button {
+      width: 100%; margin-top: 28px; padding: 16px;
+      font: inherit; font-size: 1.2rem; letter-spacing: .05em;
+      color: var(--cream); background: var(--ink);
+      border: 0; border-radius: 999px; cursor: pointer;
+    }
+    button:disabled { opacity: .5; }
+    .link { background: none; color: var(--ink); text-decoration: underline; margin-top: 12px; padding: 8px; font-size: 1rem; }
+    .msg { margin-top: 20px; padding: 14px; border-radius: 8px; display: none; }
+    .msg.show { display: block; }
+    .msg.ok { background: rgba(74, 124, 89, .15); }
+    .msg.err { background: rgba(196, 104, 122, .18); }
+    .msg.info { background: rgba(201, 168, 76, .18); }
+    .msg a { color: inherit; }
+    .hint { font-size: .95rem; opacity: .75; margin: 6px 0 0; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Subir obra</h1>
+  <p class="sub">La foto se reduce sola antes de subirla.</p>
+
+  <!-- Primera vez: guardar la clave de GitHub en este móvil -->
+  <section id="setup" hidden>
+    <label for="token">Clave de acceso</label>
+    <input id="token" type="password" autocomplete="off" placeholder="github_pat_…" />
+    <p class="hint">Solo hay que ponerla una vez. Se guarda en este móvil.</p>
+    <button id="save-token" type="button">Guardar</button>
+  </section>
+
+  <form id="form" hidden>
+    <label>Foto</label>
+    <label class="foto" id="foto-box">
+      <span id="foto-text">Toca para elegir la foto</span>
+      <img id="preview" alt="" hidden />
+      <input id="foto" type="file" accept="image/*" />
+    </label>
+
+    <label for="titulo">Título</label>
+    <input id="titulo" required />
+
+    <label for="tecnica">Técnica y medidas</label>
+    <input id="tecnica" placeholder="Acrylic · 50×40 cm" />
+
+    <label for="anio">Año</label>
+    <input id="anio" inputmode="numeric" />
+
+    <label for="descripcion">Descripción</label>
+    <textarea id="descripcion"></textarea>
+
+    <label for="emocion">Emoción del oráculo</label>
+    <select id="emocion">
+      <option value="">Solo en "All Works"</option>
+      <option value="sol">☀️ Sol</option>
+      <option value="magia">🔮 Magia</option>
+      <option value="naturaleza">🌿 Naturaleza</option>
+    </select>
+
+    <button id="submit" type="submit">Publicar obra</button>
+    <button id="forget" class="link" type="button">Cambiar clave de acceso</button>
+  </form>
+
+  <div id="msg" class="msg"></div>
+</main>
+
+<script>
+  const REPO = 'avilalopezesp-cloud/Iza-Malika';
+  const BRANCH = 'main';
+  const JSON_PATH = 'content/obras.json';
+  const MAX_SIDE = 1600;
+  const QUALITY = 0.82;
+  const TOKEN_KEY = 'iza-upload-token';
+  const SITE = 'https://avilalopezesp-cloud.github.io/Iza-Malika/';
+
+  const $ = id => document.getElementById(id);
+  let fotoBlob = null;
+
+  function getToken() {
+    try { return localStorage.getItem(TOKEN_KEY) || ''; } catch { return ''; }
+  }
+  function setToken(v) {
+    try { v ? localStorage.setItem(TOKEN_KEY, v) : localStorage.removeItem(TOKEN_KEY); } catch {}
+  }
+
+  function show(type, html) {
+    const m = $('msg');
+    m.className = 'msg show ' + type;
+    m.innerHTML = html;
+  }
+
+  function render() {
+    const has = !!getToken();
+    $('setup').hidden = has;
+    $('form').hidden = !has;
+  }
+
+  $('save-token').onclick = () => {
+    const v = $('token').value.trim();
+    if (!v) return;
+    setToken(v);
+    $('token').value = '';
+    $('msg').className = 'msg';
+    render();
+  };
+  $('forget').onclick = () => { setToken(''); render(); };
+
+  // Reduce the photo on the phone so it never hits upload size limits
+  async function resize(file) {
+    const url = URL.createObjectURL(file);
+    try {
+      const im = await new Promise((resolve, reject) => {
+        const i = new Image();
+        i.onload = () => resolve(i);
+        i.onerror = () => reject(new Error('No se pudo leer la foto.'));
+        i.src = url;
+      });
+      const scale = Math.min(1, MAX_SIDE / Math.max(im.naturalWidth, im.naturalHeight));
+      const w = Math.round(im.naturalWidth * scale);
+      const h = Math.round(im.naturalHeight * scale);
+      const canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      canvas.getContext('2d').drawImage(im, 0, 0, w, h);
+      return await new Promise((resolve, reject) =>
+        canvas.toBlob(b => b ? resolve(b) : reject(new Error('No se pudo reducir la foto.')), 'image/jpeg', QUALITY));
+    } finally {
+      URL.revokeObjectURL(url);
+    }
+  }
+
+  $('foto').onchange = async e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    $('foto-text').textContent = 'Preparando la foto…';
+    try {
+      fotoBlob = await resize(file);
+      $('preview').src = URL.createObjectURL(fotoBlob);
+      $('preview').hidden = false;
+      $('foto-text').hidden = true;
+    } catch (err) {
+      fotoBlob = null;
+      $('foto-text').textContent = err.message;
+    }
+  };
+
+  function blobToBase64(blob) {
+    return new Promise((resolve, reject) => {
+      const r = new FileReader();
+      r.onload = () => resolve(r.result.split(',')[1]);
+      r.onerror = () => reject(new Error('No se pudo preparar la foto.'));
+      r.readAsDataURL(blob);
+    });
+  }
+  function textToBase64(s) {
+    let bin = '';
+    new TextEncoder().encode(s).forEach(b => { bin += String.fromCharCode(b); });
+    return btoa(bin);
+  }
+  const base64ToText = b => new TextDecoder().decode(Uint8Array.from(atob(b.replace(/\n/g, '')), c => c.charCodeAt(0)));
+
+  function slug(s) {
+    return s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'obra';
+  }
+
+  async function gh(path, options = {}) {
+    const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+      ...options,
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+        Accept: 'application/vnd.github+json',
+        ...(options.body ? { 'Content-Type': 'application/json' } : {}),
+      },
+    });
+    if (res.status === 401 || res.status === 403) {
+      throw new Error('La clave de acceso no funciona o no tiene permiso. Toca "Cambiar clave de acceso" y ponla de nuevo.');
+    }
+    if (!res.ok) throw new Error(`GitHub respondió con un error (${res.status}). Inténtalo de nuevo.`);
+    return res.json();
+  }
+
+  async function addToList(obra) {
+    // Retry once if the list changed in between (e.g. another save at the same time)
+    for (let attempt = 0; attempt < 2; attempt++) {
+      const file = await gh(`${JSON_PATH}?ref=${BRANCH}`);
+      const data = JSON.parse(base64ToText(file.content));
+      data.obras = [obra, ...(data.obras || [])];
+      try {
+        return await gh(JSON_PATH, {
+          method: 'PUT',
+          body: JSON.stringify({
+            message: `Nueva obra: ${obra.titulo}`,
+            content: textToBase64(JSON.stringify(data, null, 2) + '\n'),
+            sha: file.sha,
+            branch: BRANCH,
+          }),
+        });
+      } catch (err) {
+        if (attempt === 1) throw err;
+      }
+    }
+  }
+
+  $('form').onsubmit = async e => {
+    e.preventDefault();
+    const titulo = $('titulo').value.trim();
+    if (!fotoBlob) return show('err', 'Falta elegir la foto.');
+    if (!titulo) return show('err', 'Falta el título.');
+
+    $('submit').disabled = true;
+    try {
+      show('info', 'Subiendo la foto…');
+      const foto = `images/obras/${slug(titulo)}-${Date.now().toString(36)}.jpg`;
+      await gh(foto, {
+        method: 'PUT',
+        body: JSON.stringify({
+          message: `Foto de la obra: ${titulo}`,
+          content: await blobToBase64(fotoBlob),
+          branch: BRANCH,
+        }),
+      });
+
+      show('info', 'Añadiendo la obra a la web…');
+      await addToList({
+        titulo,
+        foto,
+        tecnica: $('tecnica').value.trim(),
+        anio: $('anio').value.trim(),
+        descripcion: $('descripcion').value.trim(),
+        emocion: $('emocion').value,
+      });
+
+      show('ok', `¡Listo! <b>${titulo.replace(/</g, '&lt;')}</b> aparecerá en la web en 1–2 minutos.<br><a href="${SITE}">Ver la web</a>`);
+      $('form').reset();
+      fotoBlob = null;
+      $('preview').hidden = true;
+      $('foto-text').hidden = false;
+      $('foto-text').textContent = 'Toca para elegir la foto';
+    } catch (err) {
+      show('err', err.message);
+    } finally {
+      $('submit').disabled = false;
+    }
+  };
+
+  render();
+</script>
+</body>
+</html>
