@@ -30,7 +30,7 @@ content:
             required: true
           - name: foto
             label: Foto
-            description: "JPG, PNG o WEBP de menos de 3 MB. Si sale el error 413, la foto es muy grande: redúcela antes (por ejemplo, con el atajo «Foto para web»)."
+            description: "JPG, PNG o WEBP de menos de 3 MB. Si sale el error 413, la foto es muy grande: redúcela antes o usa la página subir.html, que la reduce sola."
             type: image
             required: true
           - name: tecnica
