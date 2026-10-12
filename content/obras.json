@@ -133,8 +133,15 @@
       "foto": "images/obras/retrato-femenino.jpg",
       "tecnica": "Acrylic on canvas",
       "anio": "2024",
-      "descripcion": "The quiet power in a gaze. A portrait that asks to be looked at slowly, and with patience.",
-      "emocion": ""
+      "descripcion": "The quiet power in a gaze. A portrait that asks to be looked at slowly, and with patience."
+    },
+    {
+      "titulo": "flor",
+      "foto": "images/obras/whatsapp-image-2026-10-12-at-183132.jpeg",
+      "tecnica": "Acryl en madera",
+      "anio": "2026",
+      "descripcion": "en proceso",
+      "emocion": "naturaleza"
     }
   ]
 }
